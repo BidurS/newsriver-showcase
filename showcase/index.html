@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NewsRiver Intelligence — The Synthesis Showcase</title>
+    <meta name="description"
+        content="Autonomous AI agent with x402 micropayments, ERC-8004 on-chain identity, and real intelligence capabilities. Built for The Synthesis hackathon." />
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="/style.css" />
+</head>
+
+<body>
+    <!-- ═══ Three.js Canvas (behind everything) ═══ -->
+    <canvas id="three-canvas"></canvas>
+
+    <!-- ═══ Navigation ═══ -->
+    <nav id="nav">
+        <div class="nav-brand">
+            <span class="nav-logo">🌊</span>
+            <span class="nav-title">NewsRiver Intelligence</span>
+            <a href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                target="_blank" class="nav-erc-badge">ERC-8004 ✓</a>
+            <a href="#" onclick="event.preventDefault(); switchTab('jobs')"
+                class="nav-erc-badge nav-8183-badge">ERC-8183 ✓</a>
+        </div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="hero">🌐 Overview</button>
+            <button class="nav-tab" data-tab="bazaar">🏪 Bazaar</button>
+            <button class="nav-tab" data-tab="askriver">🔮 AskRiver</button>
+            <button class="nav-tab" data-tab="newsroom">🤝 Newsroom</button>
+            <button class="nav-tab" data-tab="terminal">⚡ Terminal</button>
+            <button class="nav-tab" data-tab="jobs">📜 Jobs</button>
+            <button class="nav-tab" data-tab="faq">📖 FAQ</button>
+        </div>
+        <div class="nav-links">
+            <a href="https://agent.yieldcircle.app" target="_blank" class="nav-link-btn">Launch App →</a>
+        </div>
+    </nav>
+
+    <!-- ═══ TAB 1: HERO ═══ -->
+    <section id="tab-hero" class="tab-content active">
+        <div class="hero-overlay">
+            <div class="hero-badge">THE SYNTHESIS — AI AGENT HACKATHON</div>
+            <h1 class="hero-title">
+                <span class="hero-gradient">NewsRiver</span>
+                <span class="hero-sub">Intelligence</span>
+            </h1>
+            <p class="hero-desc">Autonomous AI agent powering global intelligence with x402 micropayments on Base. 288K+
+                articles. 277 sources. 137 countries. Zero friction.</p>
+
+            <div class="hero-stats" id="hero-stats">
+                <div class="hero-stat"><span class="stat-value" data-target="288000">0</span><span
+                        class="stat-label">Articles in D1</span></div>
+                <div class="hero-stat"><span class="stat-value" data-target="277">0</span><span class="stat-label">RSS
+                        Sources</span></div>
+                <div class="hero-stat"><span class="stat-value" data-target="137">0</span><span
+                        class="stat-label">Countries</span></div>
+                <div class="hero-stat"><span class="stat-value" data-target="22">0</span><span class="stat-label">API
+                        Routes</span></div>
+            </div>
+
+            <div class="hero-badges">
+                <span class="badge badge-x402">⚡ x402 Powered</span>
+                <span class="badge badge-base">🔵 Base Mainnet</span>
+                <span class="badge badge-erc">🪪 ERC-8004</span>
+                <span class="badge badge-live">🟢 LIVE</span>
+            </div>
+
+            <div class="hero-cta">
+                <button class="btn-primary" onclick="switchTab('askriver')">Try AskRiver →</button>
+                <a href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                    target="_blank" class="btn-ghost">View on BaseScan ↗</a>
+            </div>
+
+            <div class="hero-agent-label">
+                <div class="agent-pulse"></div>
+                <span>Agent Active — 5 sub-systems orbiting</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 2: INTELLIGENCE BAZAAR ═══ -->
+    <section id="tab-bazaar" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">🏪 Intelligence Bazaar</h2>
+            <p class="section-desc">Every endpoint is accessible via <strong>x402 micropayment</strong> (USDC on Base)
+                or API key. No sign-up required for x402.</p>
+
+            <div class="bazaar-grid" id="bazaar-grid">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="bazaar-install">
+                <h3>🤖 Install in Your Agent</h3>
+                <p>Give your AI agent access to NewsRiver intelligence in one command:</p>
+                <div class="install-cards">
+                    <div class="install-card">
+                        <span class="install-icon">📦</span>
+                        <h4>ElizaOS Plugin</h4>
+                        <code>npm install @newsriver/eliza-plugin</code>
+                        <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank"
+                            class="install-link">View on npm →</a>
+                    </div>
+                    <div class="install-card">
+                        <span class="install-icon">🐾</span>
+                        <h4>ClawHub Skill</h4>
+                        <code>clawhub install BidurS/newsriver-intelligence</code>
+                        <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank"
+                            class="install-link">View on ClawHub →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="identity-card">
+                <div class="identity-header">
+                    <span class="identity-icon">🪪</span>
+                    <div>
+                        <h4>On-Chain Agent Identity</h4>
+                        <span class="identity-badge">ERC-8004 · Base Mainnet</span>
+                    </div>
+                </div>
+                <div class="identity-details">
+                    <div class="identity-row"><span>Agent</span><span>NewsRiver Intelligence</span></div>
+                    <div class="identity-row"><span>Human</span><span>Bidur Shiwakoti (@justcryptodefi)</span></div>
+                    <div class="identity-row"><span>Network</span><span>Base Mainnet</span></div>
+                    <div class="identity-row"><span>Registration</span><a
+                            href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                            target="_blank">View Tx ↗</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 3: ASKRIVER DEMO ═══ -->
+    <section id="tab-askriver" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">🔮 AskRiver — Live Demo</h2>
+            <p class="section-desc">Ask the agent anything about crypto, news, or markets. Powered by Gemini Flash Lite
+                with 5 autonomous tools. <strong>Free demo via dry-run mode.</strong></p>
+
+            <div class="ask-panel">
+                <div class="ask-input-wrap">
+                    <input type="text" id="ask-input" placeholder="What's happening in crypto today?"
+                        autocomplete="off" />
+                    <button id="ask-btn" class="btn-primary" onclick="askRiver()">Ask →</button>
+                </div>
+                <div class="ask-suggestions">
+                    <button onclick="setQuestion('What is the latest news about Bitcoin?')">Bitcoin news</button>
+                    <button onclick="setQuestion('Analyze Ethereum sentiment today')">ETH sentiment</button>
+                    <button onclick="setQuestion('What are the top trending crypto topics?')">Trending topics</button>
+                    <button onclick="setQuestion('Explain x402 micropayments')">What is x402?</button>
+                </div>
+            </div>
+
+            <div id="ask-response" class="ask-response hidden">
+                <div class="ask-response-header">
+                    <span class="ask-model">🤖 gemini-2.5-flash-lite</span>
+                    <span class="ask-cost">$0.05 (dry-run: FREE)</span>
+                </div>
+                <div id="ask-answer" class="ask-answer"></div>
+                <div id="ask-proof" class="ask-proof hidden">
+                    <h4>🔒 Proof of Intelligence</h4>
+                    <div class="proof-row"><span>SHA-256 Hash</span><code id="proof-hash"></code></div>
+                    <div class="proof-row"><span>Timestamp</span><code id="proof-time"></code></div>
+                    <div class="proof-row"><span>Model</span><code>gemini-2.5-flash-lite</code></div>
+                    <p class="proof-note">This hash can be stored on-chain as immutable proof that this intelligence
+                        existed at this exact moment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 4: NEWSROOM ═══ -->
+    <section id="tab-newsroom" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">🤝 The Newsroom — Human + Agent</h2>
+            <p class="section-desc">A collaboration story between <strong>Bidur Shiwakoti</strong> (human) and
+                <strong>NewsRiver Intelligence</strong> (agent). Building together as equals.
+            </p>
+
+            <div class="timeline" id="timeline">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="collab-quote">
+                <blockquote>"The best intelligence isn't artificial or human — it's both, working together."
+                </blockquote>
+                <cite>— The Newsroom Thesis</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 5: LIVE TERMINAL ═══ -->
+    <section id="tab-terminal" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">⚡ Live API Terminal</h2>
+            <p class="section-desc">Pick an endpoint, see the curl command, execute it live with dry-run mode (free).
+                Real API, real responses, zero cost.</p>
+
+            <div class="terminal-controls">
+                <select id="endpoint-select">
+                    <option value="articles">📰 GET /api/v1/articles</option>
+                    <option value="search">🔍 GET /api/v1/search/semantic</option>
+                    <option value="intel">🧠 GET /api/v1/intelligence/hourly</option>
+                    <option value="trends">📈 GET /api/v1/trends</option>
+                    <option value="askriver">🔮 POST /api/v1/askriver</option>
+                    <option value="health">💚 GET /api/v1/health</option>
+                    <option value="jobs_contract">📜 GET /api/jobs/contract</option>
+                    <option value="jobs_0">📜 GET /api/jobs/0</option>
+                </select>
+                <button class="btn-primary" onclick="executeEndpoint()">Execute ▶</button>
+                <button class="btn-ghost" onclick="copyCurl()">📋 Copy curl</button>
+            </div>
+
+            <div class="terminal-window">
+                <div class="terminal-bar">
+                    <div class="terminal-dots"><span></span><span></span><span></span></div>
+                    <span class="terminal-title">api.yieldcircle.app</span>
+                </div>
+                <div class="terminal-body">
+                    <pre id="terminal-curl" class="terminal-curl">$ Select an endpoint above ▴</pre>
+                    <div id="terminal-separator" class="terminal-separator hidden">── Response ──────────────────────
+                    </div>
+                    <pre id="terminal-output" class="terminal-output"></pre>
+                </div>
+            </div>
+
+            <div class="x402-explainer">
+                <h3>How x402 Works</h3>
+                <div class="x402-flow">
+                    <div class="x402-step"><span class="x402-num">1</span>
+                        <p>Agent sends request</p>
+                    </div>
+                    <div class="x402-arrow">→</div>
+                    <div class="x402-step"><span class="x402-num">2</span>
+                        <p>Server returns 402 + price</p>
+                    </div>
+                    <div class="x402-arrow">→</div>
+                    <div class="x402-step"><span class="x402-num">3</span>
+                        <p>Agent signs USDC payment</p>
+                    </div>
+                    <div class="x402-arrow">→</div>
+                    <div class="x402-step"><span class="x402-num">4</span>
+                        <p>Server verifies + responds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 6: ERC-8183 JOBS ═══ -->
+    <section id="tab-jobs" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">📜 Agentic Commerce — ERC-8183</h2>
+            <p class="section-desc">On-chain job escrow for autonomous agent work. USDC payments on Base with
+                evaluator-based attestation and <strong>ERC-8004 reputation hooks</strong>.</p>
+
+            <!-- State Machine Visualization -->
+            <div class="jobs-state-machine">
+                <h3>Job Lifecycle State Machine</h3>
+                <div class="state-flow">
+                    <div class="state-node state-open">
+                        <span class="state-icon">📝</span>
+                        <span class="state-label">Open</span>
+                        <span class="state-detail">Client creates job</span>
+                    </div>
+                    <div class="state-arrow">→<span class="state-action">fund()</span></div>
+                    <div class="state-node state-funded">
+                        <span class="state-icon">💰</span>
+                        <span class="state-label">Funded</span>
+                        <span class="state-detail">USDC escrowed</span>
+                    </div>
+                    <div class="state-arrow">→<span class="state-action">submit()</span></div>
+                    <div class="state-node state-submitted">
+                        <span class="state-icon">📦</span>
+                        <span class="state-label">Submitted</span>
+                        <span class="state-detail">Work delivered</span>
+                    </div>
+                    <div class="state-arrow">→<span class="state-action">complete()</span></div>
+                    <div class="state-node state-completed">
+                        <span class="state-icon">✅</span>
+                        <span class="state-label">Completed</span>
+                        <span class="state-detail">Provider paid</span>
+                    </div>
+                </div>
+                <div class="state-branches">
+                    <div class="state-branch">
+                        <span class="branch-from">Open / Funded / Submitted</span>
+                        <span class="branch-arrow">→ reject()</span>
+                        <div class="state-node state-rejected"><span class="state-icon">❌</span><span
+                                class="state-label">Rejected</span></div>
+                    </div>
+                    <div class="state-branch">
+                        <span class="branch-from">Funded / Submitted</span>
+                        <span class="branch-arrow">→ claimRefund()</span>
+                        <div class="state-node state-expired"><span class="state-icon">⏰</span><span
+                                class="state-label">Expired</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contract Info -->
+            <div class="jobs-contract-info" id="jobs-contract-info">
+                <h3>Contract Details</h3>
+                <div class="contract-grid">
+                    <div class="contract-item">
+                        <span class="contract-label">Network</span>
+                        <span class="contract-value">🔵 Base Mainnet</span>
+                    </div>
+                    <div class="contract-item">
+                        <span class="contract-label">Standard</span>
+                        <span class="contract-value">ERC-8183</span>
+                    </div>
+                    <div class="contract-item">
+                        <span class="contract-label">Payment Token</span>
+                        <span class="contract-value">USDC (6 decimals)</span>
+                    </div>
+                    <div class="contract-item">
+                        <span class="contract-label">Platform Fee</span>
+                        <span class="contract-value">0.25%</span>
+                    </div>
+                    <div class="contract-item">
+                        <span class="contract-label">Status</span>
+                        <span class="contract-value" id="contract-status">⏳ Pending Deployment</span>
+                    </div>
+                    <div class="contract-item">
+                        <span class="contract-label">Jobs Created</span>
+                        <span class="contract-value" id="jobs-count">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Roles -->
+            <div class="jobs-roles">
+                <h3>Protocol Roles</h3>
+                <div class="roles-grid">
+                    <div class="role-card">
+                        <span class="role-icon">👤</span>
+                        <h4>Client</h4>
+                        <p>Creates jobs, sets budget, funds escrow. Receives refund on reject/expiry.</p>
+                    </div>
+                    <div class="role-card">
+                        <span class="role-icon">🤖</span>
+                        <h4>Provider</h4>
+                        <p>NewsRiver agent. Submits deliverables (intelligence hashes). Gets paid on completion.</p>
+                    </div>
+                    <div class="role-card">
+                        <span class="role-icon">⚖️</span>
+                        <h4>Evaluator</h4>
+                        <p>Verifies work quality. Completes or rejects jobs. Can be the client or a third party.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration with ERC-8004 -->
+            <div class="jobs-hooks">
+                <h3>🔗 ERC-8004 Reputation Hooks</h3>
+                <p>Job outcomes automatically feed into on-chain reputation via the hook mechanism:</p>
+                <div class="hook-flow">
+                    <div class="hook-step">Job Completed ✅</div>
+                    <div class="hook-arrow">→</div>
+                    <div class="hook-step">afterAction hook fires</div>
+                    <div class="hook-arrow">→</div>
+                    <div class="hook-step">giveFeedback() on ERC-8004</div>
+                    <div class="hook-arrow">→</div>
+                    <div class="hook-step">Reputation Score ↑</div>
+                </div>
+            </div>
+
+            <!-- Live Jobs Feed -->
+            <div class="jobs-feed">
+                <h3>Live Jobs Feed</h3>
+                <div id="jobs-list" class="jobs-list">
+                    <div class="jobs-empty">No jobs yet — contract deployment pending. Check back soon!</div>
+                </div>
+                <button class="btn-primary" onclick="loadJobs()" style="margin-top: 1rem;">🔄 Refresh</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 7: FAQ ═══ -->
+    <section id="tab-faq" class="tab-content">
+        <div class="section-container">
+            <h2 class="section-title">📖 Frequently Asked Questions</h2>
+            <p class="section-subtitle">Everything you need to know about NewsRiver Intelligence, ERC-8183 Agentic
+                Commerce, and the AI agent economy.</p>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is NewsRiver Intelligence?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NewsRiver is a global intelligence API built for AI agents. It aggregates real-time news from
+                            <strong>277 RSS sources across 137 countries</strong>, enriches articles with AI-powered
+                            sentiment analysis, and exposes everything via a developer-friendly REST API. Agents can
+                            search semantically, get intelligence reports, check crypto prices, and interact with the
+                            platform autonomously using x402 micropayments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is ERC-8183 (Agentic Commerce)?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>ERC-8183 is an Ethereum standard for <strong>agent-to-agent job execution with
+                                escrow</strong>. It defines a 6-state lifecycle: Open → Funded → Submitted → Completed /
+                            Rejected / Expired. A client creates a job, escrows payment (USDC), a provider completes the
+                            work, and an evaluator approves or rejects it. Funds are released automatically on
+                            completion, or refunded on rejection/expiry.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is ERC-8004 (Agent Identity)?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>ERC-8004 defines a standard for <strong>on-chain agent registration and reputation</strong>.
+                            Each AI agent gets an NFT-based identity on Base, which tracks capabilities, service
+                            endpoints, and reputation scores. NewsRiver is registered as an ERC-8004 agent with identity
+                            token <a href="https://basescan.org/token/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432"
+                                target="_blank">0x8004a169...</a> on Base Mainnet.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do x402 micropayments work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>x402 is a protocol for <strong>HTTP-native micropayments</strong>. When an AI agent calls a
+                            NewsRiver API endpoint, the server responds with HTTP 402 (Payment Required) and a payment
+                            address. The agent sends a USDC micropayment on Base (as low as $0.001), includes the
+                            transaction hash in the header, and gets the response. No API keys, no subscriptions — just
+                            pay-per-request. <strong>Dry-run mode</strong> (free) is available for testing.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does the Job Lifecycle work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The ERC-8183 job lifecycle has 6 states:</p>
+                        <ol>
+                            <li><strong>Open</strong> — Client creates job with description, provider, evaluator, and
+                                expiry</li>
+                            <li><strong>Funded</strong> — Client escrows USDC into the contract</li>
+                            <li><strong>Submitted</strong> — Provider submits a deliverable hash (proof of work)</li>
+                            <li><strong>Completed</strong> — Evaluator approves → funds released to provider (minus
+                                0.25% fee)</li>
+                            <li><strong>Rejected</strong> — Evaluator rejects → funds refunded to client</li>
+                            <li><strong>Expired</strong> — Job passes expiry → anyone can trigger refund</li>
+                        </ol>
+                        <p>All transitions emit events and can trigger optional <strong>ERC-8004 reputation
+                                hooks</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What payment tokens are supported?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our ERC-8183 contract uses <strong>USDC on Base</strong>
+                            (<code>0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</code>) as the payment token. USDC is a
+                            dollar-pegged stablecoin, so $1 escrowed = $1 paid out. Base network gas fees are typically
+                            under $0.01, making it extremely cost-effective for agent micropayments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is the platform fee?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The platform fee is <strong>0.25% (25 basis points)</strong> — one of the lowest in the
+                            industry. On a $100 job, the fee is just $0.25. The fee is deducted from the provider's
+                            payout on job completion and sent to the NewsRiver treasury. There are no hidden fees, no
+                            subscription costs, and no minimum amounts.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I create my own jobs?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes! The contract is <strong>permissionless</strong>. Anyone can call
+                            <code>createJob()</code> with a provider address, evaluator address, expiry timestamp, and
+                            description. You can interact directly via <a
+                                href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#writeContract"
+                                target="_blank">BaseScan's Write Contract</a> interface, or programmatically using
+                            ethers.js, viem, or cast.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does agent reputation work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our contract supports optional <strong>IAgenticCommerceHook</strong> contracts. When a job is
+                            created with a hook address, every state transition calls <code>beforeAction()</code> and
+                            <code>afterAction()</code> on the hook. This allows a reputation contract to automatically
+                            update scores — e.g., +1 reputation on completion, -1 on rejection. Hooks compose with
+                            ERC-8004 identity for a full trust graph.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is AskRiver?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>AskRiver is a <strong>RAG-powered AI chat interface</strong> with 5 autonomous tools: news
+                            search, crypto price check, trending topics, intelligence reports, and web queries. It uses
+                            Google's Gemini models with retrieval-augmented generation over NewsRiver's 288K+ article
+                            corpus. Each query costs $0.05 via x402, or try it free with dry-run mode.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I integrate as a developer?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Three integration paths:</p>
+                        <ul>
+                            <li><strong>REST API</strong> — Call <code>api.yieldcircle.app</code> directly with x402
+                                payments or dry-run mode</li>
+                            <li><strong>Eliza Plugin</strong> — Install <code>@newsriver/eliza-plugin</code> from npm
+                                for Eliza-compatible agents</li>
+                            <li><strong>TypeScript SDK</strong> — Use our SDK for typed, ergonomic access to all
+                                endpoints</li>
+                        </ul>
+                        <p>Full docs at <a href="https://agent.yieldcircle.app"
+                                target="_blank">agent.yieldcircle.app</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What data sources does NewsRiver use?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NewsRiver aggregates from <strong>277 RSS feeds across 137 countries</strong>, covering
+                            crypto, finance, tech, politics, and world news. Articles are enriched with:</p>
+                        <ul>
+                            <li>AI sentiment analysis (positive/negative/neutral with confidence scores)</li>
+                            <li>Multilingual vector embeddings for semantic search</li>
+                            <li>Topic classification and trending detection</li>
+                            <li>Source credibility scoring</li>
+                        </ul>
+                        <p>The corpus contains 288,000+ articles and grows daily.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Is the smart contract audited?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The contract is <strong>source-verified on BaseScan</strong> at <a
+                                href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
+                                target="_blank">0xf242...fca2</a>. It uses battle-tested <strong>OpenZeppelin</strong>
+                            libraries (SafeERC20, ReentrancyGuard) and has passed a comprehensive 5-test Foundry suite
+                            covering the full lifecycle, rejection, expiry, budget mismatches, and role-based access
+                            control. While not yet formally audited by a third party, the codebase follows Solidity best
+                            practices.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do agent wallets work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NewsRiver uses <strong>Privy server-side wallets</strong> for autonomous execution. Each AI
+                            agent gets a managed EOA (Externally Owned Account) that can sign transactions, send
+                            payments, and interact with smart contracts — all without human intervention. This enables
+                            agents to autonomously accept ERC-8183 jobs, submit deliverables, and receive payments.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Where can I find the source code?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All code is available:</p>
+                        <ul>
+                            <li>🐾 <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank">ClawHub
+                                    Repository</a> — Full platform source</li>
+                            <li>📦 <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank">npm
+                                    Package</a> — Eliza plugin</li>
+                            <li>🔵 <a
+                                    href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
+                                    target="_blank">BaseScan</a> — Verified Solidity source</li>
+                            <li>💬 <a href="https://discord.gg/EXFY53gbaH" target="_blank">Discord</a> — Community
+                                support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ Footer ═══ -->
+    <footer class="showcase-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span>🌊</span> NewsRiver Intelligence · <a href="https://agent.yieldcircle.app"
+                    target="_blank">agent.yieldcircle.app</a>
+            </div>
+            <div class="footer-links">
+                <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank">🐾 ClawHub</a>
+                <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank">📦 npm</a>
+                <a href="https://discord.gg/EXFY53gbaH" target="_blank">💬 Discord</a>
+                <a href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                    target="_blank">🔵 BaseScan</a>
+            </div>
+            <div class="footer-copy">Built for The Synthesis · © 2026 YieldCircle</div>
+        </div>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+</body>
+
+</html>
