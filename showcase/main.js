@@ -1,9 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    NewsRiver Intelligence — Synthesis Showcase
-   Three.js 3D Agent Viz + Tab Logic + API Integration
+   Tab Logic + API Integration
    ═══════════════════════════════════════════════════════════ */
-
-import * as THREE from 'three';
 
 // ── Config ──
 const API_BASE = 'https://api.yieldcircle.app';
@@ -43,193 +41,8 @@ const ENDPOINTS = {
     jobs_0: { method: 'GET', path: '/api/jobs/0', dryRun: false },
 };
 
-// ══════════════════════════════════════
-// THREE.JS 3D AGENT VISUALIZATION
-// ══════════════════════════════════════
 
-let scene, camera, renderer, clock;
-let centralOrb, subOrbs = [], particles = [];
-let mouseX = 0, mouseY = 0;
 
-function initThree() {
-    const canvas = document.getElementById('three-canvas');
-    scene = new THREE.Scene();
-    clock = new THREE.Clock();
-
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.z = 6;
-
-    renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    // ── Central Agent Orb ──
-    const centralGeo = new THREE.SphereGeometry(0.8, 64, 64);
-    const centralMat = new THREE.MeshPhongMaterial({
-        color: 0x00f0ff,
-        emissive: 0x003040,
-        shininess: 100,
-        transparent: true,
-        opacity: 0.85,
-    });
-    centralOrb = new THREE.Mesh(centralGeo, centralMat);
-    scene.add(centralOrb);
-
-    // Central glow
-    const glowGeo = new THREE.SphereGeometry(1.1, 32, 32);
-    const glowMat = new THREE.MeshBasicMaterial({
-        color: 0x00f0ff,
-        transparent: true,
-        opacity: 0.08,
-    });
-    const glow = new THREE.Mesh(glowGeo, glowMat);
-    centralOrb.add(glow);
-
-    // ── Sub-Agent Orbs ──
-    const subAgents = [
-        { color: 0x10b981, emissive: 0x052e21, name: 'Harvester', offset: 0 },
-        { color: 0x8b5cf6, emissive: 0x1a0a3e, name: 'ML Pipeline', offset: Math.PI / 2 },
-        { color: 0xf59e0b, emissive: 0x3d2605, name: 'Crypto Engine', offset: Math.PI },
-        { color: 0xef4444, emissive: 0x3d0c0c, name: 'Executor', offset: (3 * Math.PI) / 2 },
-    ];
-
-    subAgents.forEach((agent) => {
-        const geo = new THREE.SphereGeometry(0.3, 32, 32);
-        const mat = new THREE.MeshPhongMaterial({
-            color: agent.color,
-            emissive: agent.emissive,
-            shininess: 80,
-            transparent: true,
-            opacity: 0.9,
-        });
-        const mesh = new THREE.Mesh(geo, mat);
-
-        // Add subtle glow
-        const subGlow = new THREE.Mesh(
-            new THREE.SphereGeometry(0.42, 16, 16),
-            new THREE.MeshBasicMaterial({ color: agent.color, transparent: true, opacity: 0.06 })
-        );
-        mesh.add(subGlow);
-
-        mesh.userData = { angle: agent.offset, radius: 2.8, speed: 0.3 + Math.random() * 0.15, yOffset: (Math.random() - 0.5) * 0.8 };
-        scene.add(mesh);
-        subOrbs.push(mesh);
-    });
-
-    // ── Particle System (data streams) ──
-    const particleCount = 800;
-    const particleGeo = new THREE.BufferGeometry();
-    const positions = new Float32Array(particleCount * 3);
-    const colors = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount; i++) {
-        const theta = Math.random() * Math.PI * 2;
-        const phi = Math.random() * Math.PI;
-        const r = 1.5 + Math.random() * 3;
-        positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-        positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6;
-        positions[i * 3 + 2] = r * Math.cos(phi);
-
-        const c = new THREE.Color().setHSL(0.5 + Math.random() * 0.15, 0.8, 0.6);
-        colors[i * 3] = c.r;
-        colors[i * 3 + 1] = c.g;
-        colors[i * 3 + 2] = c.b;
-    }
-
-    particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    particleGeo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-    const particleMat = new THREE.PointsMaterial({
-        size: 0.03,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.6,
-        blending: THREE.AdditiveBlending,
-        depthWrite: false,
-    });
-
-    const particleSystem = new THREE.Points(particleGeo, particleMat);
-    scene.add(particleSystem);
-    particles.push(particleSystem);
-
-    // ── Connection lines (orbital rings) ──
-    const ringGeo = new THREE.RingGeometry(2.75, 2.85, 64);
-    const ringMat = new THREE.MeshBasicMaterial({
-        color: 0x00f0ff,
-        transparent: true,
-        opacity: 0.04,
-        side: THREE.DoubleSide,
-    });
-    const ring = new THREE.Mesh(ringGeo, ringMat);
-    ring.rotation.x = Math.PI / 2;
-    scene.add(ring);
-
-    // Second ring tilted
-    const ring2 = ring.clone();
-    ring2.rotation.x = Math.PI / 3;
-    ring2.rotation.y = Math.PI / 4;
-    ring2.material = ringMat.clone();
-    ring2.material.opacity = 0.025;
-    scene.add(ring2);
-
-    // ── Lights ──
-    const ambient = new THREE.AmbientLight(0x404060, 0.6);
-    scene.add(ambient);
-
-    const point1 = new THREE.PointLight(0x00f0ff, 1.2, 20);
-    point1.position.set(3, 3, 3);
-    scene.add(point1);
-
-    const point2 = new THREE.PointLight(0x8b5cf6, 0.8, 20);
-    point2.position.set(-3, -2, 2);
-    scene.add(point2);
-
-    // ── Mouse tracking ──
-    document.addEventListener('mousemove', (e) => {
-        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    window.addEventListener('resize', () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-    animate();
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
-
-    // Central orb gentle bob
-    centralOrb.rotation.y = t * 0.15;
-    centralOrb.position.y = Math.sin(t * 0.5) * 0.1;
-
-    // Sub-orbs orbit
-    subOrbs.forEach((orb) => {
-        const d = orb.userData;
-        d.angle += d.speed * 0.008;
-        orb.position.x = Math.cos(d.angle) * d.radius;
-        orb.position.z = Math.sin(d.angle) * d.radius;
-        orb.position.y = d.yOffset + Math.sin(t * 0.8 + d.angle) * 0.3;
-        orb.rotation.y = t * 0.3;
-    });
-
-    // Particles rotate slowly
-    particles.forEach((p) => {
-        p.rotation.y = t * 0.05;
-        p.rotation.x = Math.sin(t * 0.02) * 0.1;
-    });
-
-    // Camera follows mouse gently
-    camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.03;
-    camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.03;
-    camera.lookAt(0, 0, 0);
-
-    renderer.render(scene, camera);
-}
 
 // ══════════════════════════════════════
 // TAB NAVIGATION
@@ -321,11 +134,15 @@ window.askRiver = async function () {
     btn.textContent = '...';
 
     try {
+        const ctrl = new AbortController();
+        const timeoutId = setTimeout(() => ctrl.abort(), 8000);
         const res = await fetch(`${API_BASE}/api/v1/askriver`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-Dry-Run': 'true' },
             body: JSON.stringify({ message: q, model: 'gemini-2.5-flash-lite' }),
+            signal: ctrl.signal,
         });
+        clearTimeout(timeoutId);
 
         const data = await res.json();
         const answer = data.response || data.answer || data.message || JSON.stringify(data, null, 2);
@@ -341,7 +158,7 @@ window.askRiver = async function () {
         document.getElementById('proof-time').textContent = new Date().toISOString();
         proofEl.classList.remove('hidden');
     } catch (err) {
-        answerEl.textContent = `Error: ${err.message}. The API might be rate-limited or unavailable. Try again in a moment.`;
+        answerEl.innerHTML = `<div style="color:var(--red);display:flex;align-items:center;gap:8px;"><span style="font-size:1.3rem;">⚠️</span> <span>${err.name === 'AbortError' ? 'Request timed out. The API server may be cold-starting — try again.' : 'Failed to fetch. The API might be rate-limited or unavailable. Try again in a moment.'}</span></div>`;
     }
 
     btn.disabled = false;
@@ -499,8 +316,491 @@ window.loadJobs = async function () {
         }
 
         listEl.innerHTML = html;
+
+        // ── Agent Activity (autonomous brain) ──
+        loadAgentActivity();
+
     } catch (err) {
         listEl.innerHTML = `<div class="jobs-empty">Could not load jobs: ${err.message}</div>`;
+    }
+};
+
+// ══════════════════════════════════════
+// AGENT ACTIVITY — AUTONOMOUS BRAIN
+// ══════════════════════════════════════
+async function loadAgentActivity() {
+    const container = document.getElementById('agent-activity');
+    if (!container) return;
+
+    try {
+        const res = await fetch(`${API_BASE}/api/jobs/treasury`);
+        const data = await res.json();
+
+        const { agent, treasury, autonomy } = data;
+
+        // Format decisions
+        const decisionsHtml = (autonomy.recent_decisions || []).slice(0, 5).map(d => {
+            const icon = d.decision_type === 'job_creation' ? '🎯'
+                : d.decision_type === 'budget_allocation' ? '💰'
+                    : d.decision_type === 'heartbeat' ? '💤'
+                        : '🤖';
+            const statusCls = d.status === 'logged' ? 'decision-active'
+                : d.status === 'skipped' ? 'decision-skipped'
+                    : 'decision-pending';
+            const ago = timeAgo(d.created_at);
+            return `
+                <div class="decision-card ${statusCls}">
+                    <div class="decision-header">
+                        <span class="decision-icon">${icon}</span>
+                        <span class="decision-type">${d.decision_type.replace('_', ' ')}</span>
+                        <span class="decision-time">${ago}</span>
+                    </div>
+                    ${d.topic ? `<div class="decision-topic">"${d.topic}"</div>` : ''}
+                    <div class="decision-reasoning">${d.reasoning}</div>
+                    ${d.amount_allocated > 0 ? `<div class="decision-amount">Allocated: $${d.amount_allocated.toFixed(2)} USDC</div>` : ''}
+                </div>
+            `;
+        }).join('') || '<div class="jobs-empty">No decisions yet — agent will start on next cron cycle</div>';
+
+        // Revenue bar width (max 100%)
+        const maxBar = Math.max(treasury.balance_usdc, treasury.total_allocated, 1);
+        const balPct = Math.min((treasury.balance_usdc / maxBar) * 100, 100);
+        const spentPct = Math.min((treasury.total_allocated / maxBar) * 100, 100);
+
+        container.innerHTML = `
+            <div class="agent-brain-section">
+                <h3 class="pipeline-title">🧠 Autonomous Agent Brain</h3>
+
+                <div class="agent-identity-row">
+                    <div class="agent-identity-card">
+                        <span class="agent-status-dot"></span>
+                        <div>
+                            <div class="agent-name">${agent.name}</div>
+                            <div class="agent-wallet-addr">${agent.wallet.slice(0, 6)}...${agent.wallet.slice(-4)}</div>
+                        </div>
+                        <span class="agent-badge">${agent.identity}</span>
+                    </div>
+                </div>
+
+                <div class="treasury-stats">
+                    <div class="treasury-stat">
+                        <span class="treasury-stat-value">$${treasury.balance_usdc.toFixed(2)}</span>
+                        <span class="treasury-stat-label">USDC Balance</span>
+                        <div class="treasury-bar"><div class="treasury-bar-fill balance-fill" style="width:${balPct}%"></div></div>
+                    </div>
+                    <div class="treasury-stat">
+                        <span class="treasury-stat-value">$${treasury.estimated_24h_revenue.toFixed(4)}</span>
+                        <span class="treasury-stat-label">24h Revenue</span>
+                    </div>
+                    <div class="treasury-stat">
+                        <span class="treasury-stat-value">$${treasury.total_allocated.toFixed(2)}</span>
+                        <span class="treasury-stat-label">Allocated</span>
+                        <div class="treasury-bar"><div class="treasury-bar-fill spent-fill" style="width:${spentPct}%"></div></div>
+                    </div>
+                    <div class="treasury-stat">
+                        <span class="treasury-stat-value">${autonomy.total_decisions}</span>
+                        <span class="treasury-stat-label">Decisions Made</span>
+                    </div>
+                </div>
+
+                <h4 class="decisions-title">Recent Autonomous Decisions</h4>
+                <div class="decisions-list">
+                    ${decisionsHtml}
+                </div>
+
+                <div class="agent-loop-info">
+                    <span>⏰ Loop interval: ${autonomy.loop_interval}</span>
+                    <span>🔒 Min balance: $${autonomy.min_balance_threshold.toFixed(2)} USDC</span>
+                </div>
+            </div>
+        `;
+    } catch (err) {
+        container.innerHTML = '<div class="jobs-empty">Agent activity unavailable</div>';
+    }
+}
+
+function timeAgo(dateStr) {
+    const now = new Date();
+    const date = new Date(dateStr + 'Z'); // D1 stores UTC
+    const diff = Math.floor((now - date) / 1000);
+    if (diff < 60) return 'just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+    return `${Math.floor(diff / 86400)}d ago`;
+}
+
+function compactNum(n) {
+    if (n >= 1e6) return (n / 1e6).toFixed(1) + 'M';
+    if (n >= 1e3) return (n / 1e3).toFixed(1) + 'K';
+    return String(n);
+}
+
+// ══════════════════════════════════════
+// ANALYTICS DASHBOARD
+// ══════════════════════════════════════
+let analyticsInterval = null;
+let analyticsLoaded = false;
+
+window.loadAnalytics = async function () {
+    const pulseMeta = document.getElementById('pulse-meta');
+    if (pulseMeta) pulseMeta.textContent = 'Fetching...';
+
+    try {
+        // Parallel-fetch all 6 endpoints
+        const [treasuryRes, summaryRes, realtimeRes, intentsRes, fleetRes, countRes] = await Promise.all([
+            fetch(`${API_BASE}/api/jobs/treasury`).catch(() => null),
+            fetch(`${API_BASE}/api/analytics/summary?days=30`).catch(() => null),
+            fetch(`${API_BASE}/api/analytics/realtime`).catch(() => null),
+            fetch(`${API_BASE}/api/jobs/intents/stats`).catch(() => null),
+            fetch(`${API_BASE}/api/agents/fleet/stats`).catch(() => null),
+            fetch(`${API_BASE}/api/jobs/count`).catch(() => null),
+        ]);
+
+        const treasury = treasuryRes ? await treasuryRes.json() : null;
+        const summary = summaryRes ? await summaryRes.json() : null;
+        const realtime = realtimeRes ? await realtimeRes.json() : null;
+        const intents = intentsRes ? await intentsRes.json() : null;
+        const fleet = fleetRes ? await fleetRes.json() : null;
+        const jobCount = countRes ? await countRes.json() : null;
+
+        // ── Pulse Bar (real-time) ──
+        if (realtime) {
+            const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+            el('pulse-requests', compactNum(realtime.last_hour?.total_requests || 0));
+            el('pulse-tokens', compactNum(realtime.last_hour?.total_tokens || 0));
+            el('pulse-cost', '$' + (realtime.last_hour?.total_cost || 0).toFixed(4));
+            if (pulseMeta) pulseMeta.textContent = `Updated ${new Date().toLocaleTimeString()}`;
+        } else {
+            if (pulseMeta) pulseMeta.textContent = 'Connected';
+        }
+
+        // ── Treasury Panel ──
+        if (treasury) {
+            const t = treasury.treasury || {};
+            const a = treasury.autonomy || {};
+            const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+            const bal = t.balance_usdc || 0;
+            const alloc = t.total_allocated || 0;
+            const maxBar = Math.max(bal, alloc, 1);
+
+            el('treasury-balance', '$' + bal.toFixed(2));
+            el('treasury-revenue', '$' + (t.estimated_24h_revenue || 0).toFixed(4));
+            el('treasury-allocated', '$' + alloc.toFixed(2));
+            el('treasury-decisions', a.total_decisions || 0);
+
+            const balBar = document.getElementById('treasury-balance-bar');
+            const spentBar = document.getElementById('treasury-spent-bar');
+            if (balBar) balBar.style.width = Math.min((bal / maxBar) * 100, 100) + '%';
+            if (spentBar) spentBar.style.width = Math.min((alloc / maxBar) * 100, 100) + '%';
+        }
+
+        // ── P&L Panel ──
+        if (summary) {
+            const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+            const rev = summary.totals?.revenue || 0;
+            const cost = summary.totals?.cost || 0;
+            const net = rev - cost;
+
+            el('pnl-revenue', '$' + rev.toFixed(4));
+            el('pnl-costs', '$' + cost.toFixed(4));
+            el('pnl-net', (net >= 0 ? '+' : '') + '$' + net.toFixed(4));
+            el('pnl-paid-requests', compactNum(summary.totals?.paid_requests || 0));
+            el('pnl-period', `${summary.period_days || 30} days`);
+
+            // Color net P&L
+            const netEl = document.getElementById('pnl-net');
+            if (netEl) {
+                netEl.classList.remove('pnl-positive', 'pnl-negative');
+                netEl.classList.add(net >= 0 ? 'pnl-positive' : 'pnl-negative');
+            }
+        }
+
+        // ── Intelligence Pipeline ──
+        if (intents || jobCount) {
+            const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+            const totalIntents = intents?.total_intents || 0;
+            const onChain = jobCount?.count || 0;
+            const paidReqs = treasury?.treasury?.paid_requests || summary?.totals?.paid_requests || 0;
+
+            el('funnel-queries', compactNum(paidReqs));
+            el('funnel-intents', compactNum(totalIntents));
+            el('funnel-onchain', onChain);
+
+            // Animate funnel bar widths
+            const maxFunnel = Math.max(277, 288000, paidReqs, totalIntents, onChain, 1);
+            const funnelBars = document.querySelectorAll('#pipeline-funnel .funnel-bar');
+            const widths = [100, 85, Math.max((paidReqs / 300) * 40, 5), Math.max((totalIntents / 100) * 20, 4), Math.max((onChain / 10) * 8, 2)];
+            funnelBars.forEach((bar, i) => {
+                if (widths[i] !== undefined) bar.style.width = widths[i] + '%';
+            });
+        }
+
+        // ── Fleet Overview ──
+        if (fleet) {
+            const el = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+            el('fleet-buys', fleet.signals?.buys || 0);
+            el('fleet-holds', fleet.signals?.holds || 0);
+            el('fleet-sells', fleet.signals?.sells || 0);
+            el('fleet-total-signals', fleet.signals?.total || 0);
+            el('fleet-open', fleet.open_positions?.count || 0);
+            const unrealized = fleet.open_positions?.unrealized_pnl || 0;
+            el('fleet-unrealized', (unrealized >= 0 ? '+' : '') + '$' + Math.abs(unrealized).toFixed(2));
+            const unrealizedEl = document.getElementById('fleet-unrealized');
+            if (unrealizedEl) unrealizedEl.style.color = unrealized >= 0 ? '#34d399' : '#f87171';
+        }
+
+        // ── Decision Feed ──
+        if (treasury?.autonomy?.recent_decisions) {
+            const decisions = treasury.autonomy.recent_decisions;
+            const feed = document.getElementById('decision-feed');
+            const badge = document.getElementById('decision-count-badge');
+
+            if (badge) badge.textContent = `${treasury.autonomy.total_decisions || decisions.length} decisions`;
+
+            if (feed && decisions.length > 0) {
+                feed.innerHTML = decisions.map(d => {
+                    const icon = d.decision_type === 'job_creation' ? '🎯'
+                        : d.decision_type === 'budget_allocation' ? '💰'
+                            : d.decision_type === 'heartbeat' ? '💤' : '🤖';
+                    return `
+                        <div class="decision-feed-item">
+                            <div class="decision-feed-icon">${icon}</div>
+                            <div class="decision-feed-content">
+                                <span class="decision-feed-type">${(d.decision_type || '').replace(/_/g, ' ')}</span>
+                                <span class="decision-feed-time">${timeAgo(d.created_at)}</span>
+                                ${d.topic ? `<div class="decision-feed-topic">"${d.topic}"</div>` : ''}
+                                <div class="decision-feed-reasoning">${d.reasoning || ''}</div>
+                                ${d.amount_allocated > 0 ? `<div class="decision-feed-amount">Allocated: $${d.amount_allocated.toFixed(2)} USDC</div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            } else if (feed) {
+                feed.innerHTML = '<div class="decision-feed-empty">No decisions yet — agent will start on next cron cycle</div>';
+            }
+        }
+
+        analyticsLoaded = true;
+
+    } catch (err) {
+        console.error('Analytics load error:', err);
+        if (pulseMeta) pulseMeta.textContent = 'Error loading';
+    }
+};
+
+// Auto-refresh logic
+function startAnalyticsRefresh() {
+    if (analyticsInterval) return;
+    analyticsInterval = setInterval(() => {
+        const tab = document.getElementById('tab-analytics');
+        if (tab && tab.classList.contains('active')) {
+            loadAnalytics();
+        }
+    }, 30000);
+}
+
+function stopAnalyticsRefresh() {
+    if (analyticsInterval) {
+        clearInterval(analyticsInterval);
+        analyticsInterval = null;
+    }
+}
+
+// ══════════════════════════════════════
+// ON-CHAIN DASHBOARD (viem + API)
+// ══════════════════════════════════════
+
+const OC_CONTRACT = '0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2';
+const OC_USDC = '0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913';
+const OC_AGENT = '0xEae03EB54eB26B38057544895E834aF42fc46A69';
+const OC_RPC = 'https://mainnet.base.org';
+const OC_RPC_BACKUP = 'https://base.blockpi.network/v1/rpc/public';
+const OC_STATUS_LABELS = ['Open', 'Funded', 'Submitted', 'Completed', 'Rejected', 'Expired'];
+const OC_STATUS_COLORS = { Open: '#3b82f6', Funded: '#f59e0b', Submitted: '#8b5cf6', Completed: '#10b981', Rejected: '#ef4444', Expired: '#6b7280' };
+
+let onchainLoaded = false;
+
+// ── Minimal eth_call helpers with failover ──
+async function ethCall(to, data) {
+    const rpcs = [OC_RPC, OC_RPC_BACKUP];
+    for (const rpc of rpcs) {
+        try {
+            const res = await fetch(rpc, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ jsonrpc: '2.0', id: 1, method: 'eth_call', params: [{ to, data }, 'latest'] })
+            });
+            if (!res.ok) continue;
+            const json = await res.json();
+            if (json.error) continue;
+            return json.result;
+        } catch { continue; }
+    }
+    return '0x';
+}
+
+async function ocGetJobCount() {
+    try {
+        // getJobCount() selector = 0xb02b4a2f
+        const result = await ethCall(OC_CONTRACT, '0xb02b4a2f');
+        return parseInt(result, 16);
+    } catch { return 0; }
+}
+
+async function ocGetUsdcBalance() {
+    try {
+        // balanceOf(address) selector = 0x70a08231, padded address
+        const paddedAddr = '000000000000000000000000' + OC_AGENT.slice(2).toLowerCase();
+        const result = await ethCall(OC_USDC, '0x70a08231' + paddedAddr);
+        return parseInt(result, 16) / 1e6;
+    } catch { return 0; }
+}
+
+async function ocGetJob(jobId) {
+    try {
+        // getJob(uint256) selector = 0xbf22c457 — pad uint256
+        const paddedId = jobId.toString(16).padStart(64, '0');
+        const result = await ethCall(OC_CONTRACT, '0xbf22c457' + paddedId);
+        if (!result || result === '0x' || result.length < 130) return null;
+        // ABI: returns (tuple(client, provider, evaluator, hook, string description, uint256 budget, uint256 expiredAt, uint8 status, bytes32 deliverable))
+        // word[0] = offset pointer to tuple data (0x20) — SKIP THIS
+        // word[1] = client, word[2] = provider, word[3] = evaluator, word[4] = hook
+        // word[5] = offset to description string (relative to tuple start at word[1])
+        // word[6] = budget, word[7] = expiredAt, word[8] = status, word[9] = deliverable
+        const hex = result.slice(2);
+        const word = (i) => hex.slice(i * 64, (i + 1) * 64);
+        const addr = (i) => '0x' + word(i).slice(24);
+        const num = (i) => parseInt(word(i), 16);
+
+        const BASE = 1; // skip word[0] (tuple offset pointer)
+        const client = addr(BASE + 0);
+        const provider = addr(BASE + 1);
+        const evaluator = addr(BASE + 2);
+        const hook = addr(BASE + 3);
+        const budget = num(BASE + 5) / 1e6;
+        const expiredAt = num(BASE + 6);
+        const statusCode = num(BASE + 7);
+        const status = OC_STATUS_LABELS[statusCode] || 'Unknown';
+
+        // Decode dynamic string (description)
+        const descOffsetBytes = num(BASE + 4); // offset relative to tuple start
+        const descWordIdx = BASE + (descOffsetBytes / 32);
+        const descLen = parseInt(hex.slice(descWordIdx * 64, (descWordIdx + 1) * 64), 16);
+        let description = '';
+        try {
+            const descHex = hex.slice((descWordIdx + 1) * 64, (descWordIdx + 1) * 64 + descLen * 2);
+            description = new TextDecoder().decode(new Uint8Array(descHex.match(/.{2}/g).map(b => parseInt(b, 16))));
+        } catch { description = 'On-chain job #' + jobId; }
+
+        return { id: jobId, client, provider, evaluator, budget, status, description, expiredAt };
+    } catch (e) { console.warn('getJob error:', e); return null; }
+}
+
+function shortenAddr(a) { return a ? `${a.slice(0, 6)}…${a.slice(-4)}` : '—'; }
+
+window.loadOnChainData = async function () {
+    const setEl = (id, v) => { const e = document.getElementById(id); if (e) e.textContent = v; };
+
+    try {
+        // 1. On-chain reads (parallel)
+        const [jobCount, balance] = await Promise.all([ ocGetJobCount(), ocGetUsdcBalance() ]);
+        setEl('oc-job-count', jobCount);
+        setEl('oc-usdc-balance', '$' + balance.toFixed(2));
+        setEl('oc-treasury-balance', '$' + balance.toFixed(4) + ' USDC');
+
+        // 2. API calls (parallel)
+        const [treasuryRes, activityRes] = await Promise.allSettled([
+            fetch(`${API_BASE}/api/jobs/treasury`).then(r => r.json()),
+            fetch(`${API_BASE}/api/activity`).then(r => r.json()).catch(() => null),
+        ]);
+
+        const treasury = treasuryRes.status === 'fulfilled' ? treasuryRes.value : null;
+        const activity = activityRes.status === 'fulfilled' ? activityRes.value : null;
+
+        // Treasury
+        if (treasury?.treasury) {
+            const t = treasury.treasury;
+            setEl('oc-treasury-revenue', '$' + (t.total_revenue || 0).toFixed(4));
+            setEl('oc-decisions', treasury.autonomy?.total_decisions || 0);
+            setEl('oc-paid-requests', compactNum(t.paid_requests || 0));
+        }
+
+        // 3. Load on-chain jobs
+        const jobsList = document.getElementById('oc-jobs-list');
+        if (jobCount > 0 && jobsList) {
+            const jobs = [];
+            const limit = Math.min(jobCount, 10);
+            for (let i = 0; i < limit; i++) {
+                const job = await ocGetJob(i);
+                if (job) jobs.push(job);
+            }
+            if (jobs.length > 0) {
+                jobsList.innerHTML = jobs.map(j => `
+                    <div class="oc-job-row">
+                        <div class="oc-job-header">
+                            <span class="oc-job-id">#${j.id}</span>
+                            <span class="oc-job-status" style="background:${OC_STATUS_COLORS[j.status] || '#6b7280'}20;color:${OC_STATUS_COLORS[j.status] || '#6b7280'}">${j.status}</span>
+                        </div>
+                        <div class="oc-job-desc">${j.description}</div>
+                        <div class="oc-job-meta">
+                            <span>💰 ${j.budget.toFixed(2)} USDC</span>
+                            <span>Client: ${shortenAddr(j.client)}</span>
+                            <span>Provider: ${shortenAddr(j.provider)}</span>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                jobsList.innerHTML = '<div class="oc-empty">No decodable jobs found on-chain</div>';
+            }
+        } else if (jobsList) {
+            // Try API fallback for demo jobs
+            try {
+                const apiJobs = await fetch(`${API_BASE}/api/jobs`).then(r => r.json());
+                if (apiJobs?.jobs?.length > 0) {
+                    jobsList.innerHTML = apiJobs.jobs.map(j => `
+                        <div class="oc-job-row">
+                            <div class="oc-job-header">
+                                <span class="oc-job-id">#${j.job_id ?? j.id}</span>
+                                <span class="oc-job-status" style="background:${OC_STATUS_COLORS[j.status] || '#6b7280'}20;color:${OC_STATUS_COLORS[j.status] || '#6b7280'}">${j.status || 'Completed'}</span>
+                            </div>
+                            <div class="oc-job-desc">${j.description || j.topic || 'Intelligence job'}</div>
+                            <div class="oc-job-meta">
+                                <span>💰 ${(j.budget || j.amount_allocated || 0).toFixed ? (j.budget || j.amount_allocated || 0).toFixed(2) : j.budget || '0'} USDC</span>
+                                ${j.tx_hash ? `<a href="https://basescan.org/tx/${j.tx_hash}" target="_blank" style="color:var(--accent)">View TX ↗</a>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    jobsList.innerHTML = '<div class="oc-empty">No jobs found — autonomous loop will create jobs when budget is available</div>';
+                }
+            } catch {
+                jobsList.innerHTML = '<div class="oc-empty">No jobs yet — contract deployment pending</div>';
+            }
+        }
+
+        // 4. Activity feed
+        const activityFeed = document.getElementById('oc-activity-feed');
+        if (activityFeed) {
+            const events = activity?.events || activity?.activity || [];
+            if (events.length > 0) {
+                activityFeed.innerHTML = events.slice(0, 15).map(e => `
+                    <div class="oc-activity-item">
+                        <span class="oc-activity-icon">${e.type === 'job_created' ? '📝' : e.type === 'payment' ? '💸' : e.type === 'query' ? '🔍' : '⚡'}</span>
+                        <div class="oc-activity-content">
+                            <span class="oc-activity-type">${(e.type || '').replace(/_/g, ' ')}</span>
+                            <span class="oc-activity-desc">${e.description || e.topic || ''}</span>
+                        </div>
+                        <span class="oc-activity-time">${e.created_at ? timeAgo(e.created_at) : ''}</span>
+                    </div>
+                `).join('');
+            } else {
+                activityFeed.innerHTML = '<div class="oc-empty">No recent activity — agent monitors continuously</div>';
+            }
+        }
+
+        onchainLoaded = true;
+    } catch (err) {
+        console.error('On-chain data load error:', err);
     }
 };
 
@@ -508,7 +808,7 @@ window.loadJobs = async function () {
 // INIT
 // ══════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-    initThree();
+    // Three.js removed — using CSS dot-grid background
     animateCounters();
     renderBazaar();
     renderTimeline();
@@ -518,4 +818,140 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Load ERC-8183 jobs tab data
     loadJobs();
+});
+
+// ── Hook analytics + on-chain into tab switch ──
+const _origSwitchTab = window.switchTab;
+window.switchTab = function (tabId) {
+    _origSwitchTab(tabId);
+    if (tabId === 'analytics') {
+        if (!analyticsLoaded) loadAnalytics();
+        startAnalyticsRefresh();
+    } else if (tabId === 'onchain') {
+        if (!onchainLoaded) loadOnChainData();
+    } else {
+        stopAnalyticsRefresh();
+    }
+};
+
+// ══════════════════════════════════════
+// BRIDGE TAB — Live Quote Fetcher
+// ══════════════════════════════════════
+
+window.fetchBridgeQuote = async function () {
+    const btn = document.getElementById('bridge-quote-btn');
+    const result = document.getElementById('bridge-result');
+    const from = document.getElementById('bridge-from').value;
+    const to = document.getElementById('bridge-to').value;
+    const token = document.getElementById('bridge-token').value;
+    const amount = document.getElementById('bridge-amount').value;
+
+    if (from === to) {
+        result.style.display = 'block';
+        result.innerHTML = '<div style="color:#f87171;text-align:center;">⚠️ Origin and destination chains must be different</div>';
+        return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Querying solvers...';
+    result.style.display = 'block';
+    result.innerHTML = '<div style="text-align:center;color:rgba(255,255,255,0.5);">🔄 Fetching live quote from Across solver network...</div>';
+
+    try {
+        const ctrl = new AbortController();
+        const timeoutId = setTimeout(() => ctrl.abort(), 10000);
+        const res = await fetch(
+            `${API_BASE}/api/bridge/quote?from=${from}&to=${to}&token=${token}&amount=${amount}`,
+            { signal: ctrl.signal }
+        );
+        clearTimeout(timeoutId);
+        const data = await res.json();
+
+        if (data.error) {
+            result.innerHTML = `<div style="color:#f87171;text-align:center;">⚠️ ${data.error}</div>`;
+            return;
+        }
+
+        const q = data.quote;
+        const chainNames = { '1': 'Ethereum', '8453': 'Base', '42161': 'Arbitrum', '10': 'Optimism', '137': 'Polygon' };
+        result.innerHTML = `
+            <div class="bridge-result-grid">
+                <div class="bridge-result-item">
+                    <div class="label">Route</div>
+                    <div class="value">${chainNames[from] || from} → ${chainNames[to] || to}</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">Fill Time</div>
+                    <div class="value highlight">${q.estimatedFillTime}</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">You Send</div>
+                    <div class="value">${q.inputAmount.human} ${q.inputToken.symbol}</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">You Receive</div>
+                    <div class="value highlight">${q.outputAmount.human} ${q.outputToken?.symbol || q.inputToken.symbol}</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">Total Fee</div>
+                    <div class="value">${q.fees.total.human} (${q.fees.total.pct})</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">Platform Fee</div>
+                    <div class="value">${q.fees.platform.human} (${q.fees.platform.bps} bps)</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">Solver</div>
+                    <div class="value" style="font-size:0.75rem;word-break:break-all;">${q.exclusiveRelayer || 'Open market'}</div>
+                </div>
+                <div class="bridge-result-item">
+                    <div class="label">Quote ID</div>
+                    <div class="value" style="font-size:0.75rem;">${q.quoteId || ''}</div>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:16px;font-size:0.75rem;color:rgba(255,255,255,0.3);">
+                ✅ Live data from Across Protocol solver network · ${new Date().toLocaleTimeString()}
+            </div>`;
+    } catch (err) {
+        result.innerHTML = `<div style="color:#f87171;text-align:center;">⚠️ ${err.name === 'AbortError' ? 'Request timed out — the bridge solver may be busy. Try again.' : 'Network error: ' + err.message}</div>`;
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Get Live Quote →';
+    }
+};
+
+window.swapBridgeChains = function () {
+    const from = document.getElementById('bridge-from');
+    const to = document.getElementById('bridge-to');
+    const tmp = from.value;
+    from.value = to.value;
+    to.value = tmp;
+};
+
+// ── Code Tab Switching (Bridge) ──
+document.querySelectorAll('.code-tab[data-codetab]').forEach(tab => {
+    tab.addEventListener('click', () => {
+        tab.closest('.section-container').querySelectorAll('.code-tab[data-codetab]').forEach(t => t.classList.remove('active'));
+        tab.closest('.section-container').querySelectorAll('[id^="codetab-"]').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(`codetab-${tab.dataset.codetab}`).classList.add('active');
+    });
+});
+
+// ── Code Tab Switching (DeFi) ──
+document.querySelectorAll('.code-tab[data-defitab]').forEach(tab => {
+    tab.addEventListener('click', () => {
+        tab.closest('.section-container').querySelectorAll('.code-tab[data-defitab]').forEach(t => t.classList.remove('active'));
+        tab.closest('.section-container').querySelectorAll('[id^="defitab-"]').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(`defitab-${tab.dataset.defitab}`).classList.add('active');
+    });
+});
+
+// ── DeFi Capability Pill Highlight ──
+document.querySelectorAll('.pill-bar .pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+        pill.closest('.pill-bar').querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+    });
 });

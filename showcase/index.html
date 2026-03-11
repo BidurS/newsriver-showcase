@@ -17,7 +17,7 @@
 
 <body>
     <!-- ═══ Three.js Canvas (behind everything) ═══ -->
-    <canvas id="three-canvas"></canvas>
+    <!-- Three.js canvas removed — using CSS dot-grid background -->
 
     <!-- ═══ Navigation ═══ -->
     <nav id="nav">
@@ -30,13 +30,18 @@
                 class="nav-erc-badge nav-8183-badge">ERC-8183 ✓</a>
         </div>
         <div class="nav-tabs">
-            <button class="nav-tab active" data-tab="hero">🌐 Overview</button>
-            <button class="nav-tab" data-tab="bazaar">🏪 Bazaar</button>
-            <button class="nav-tab" data-tab="askriver">🔮 AskRiver</button>
-            <button class="nav-tab" data-tab="newsroom">🤝 Newsroom</button>
-            <button class="nav-tab" data-tab="terminal">⚡ Terminal</button>
-            <button class="nav-tab" data-tab="jobs">📜 Jobs</button>
-            <button class="nav-tab" data-tab="faq">📖 FAQ</button>
+            <button class="nav-tab active" data-tab="hero">Overview</button>
+            <button class="nav-tab" data-tab="bazaar">Bazaar</button>
+            <button class="nav-tab" data-tab="askriver">AskRiver</button>
+            <button class="nav-tab" data-tab="newsroom">Newsroom</button>
+            <button class="nav-tab" data-tab="terminal">Terminal</button>
+            <button class="nav-tab" data-tab="jobs">Jobs</button>
+            <button class="nav-tab" data-tab="bridge">Bridge</button>
+            <button class="nav-tab" data-tab="defi">DeFi</button>
+            <button class="nav-tab" data-tab="analytics">Analytics</button>
+            <button class="nav-tab" data-tab="onchain">⛓️ On-Chain</button>
+            <button class="nav-tab" data-tab="vision">Vision</button>
+            <button class="nav-tab" data-tab="faq">Docs</button>
         </div>
         <div class="nav-links">
             <a href="https://agent.yieldcircle.app" target="_blank" class="nav-link-btn">Launch App →</a>
@@ -46,30 +51,33 @@
     <!-- ═══ TAB 1: HERO ═══ -->
     <section id="tab-hero" class="tab-content active">
         <div class="hero-overlay">
-            <div class="hero-badge">THE SYNTHESIS — AI AGENT HACKATHON</div>
+            <div class="hero-badge">THE SYNTHESIS · AI AGENT HACKATHON</div>
             <h1 class="hero-title">
                 <span class="hero-gradient">NewsRiver</span>
                 <span class="hero-sub">Intelligence</span>
             </h1>
-            <p class="hero-desc">Autonomous AI agent powering global intelligence with x402 micropayments on Base. 288K+
-                articles. 277 sources. 137 countries. Zero friction.</p>
+            <p class="hero-desc">Autonomous AI agent powering global intelligence with x402 micropayments on Base.
+                Real-time news aggregation, DeFi routing, and cross-chain bridging — all API-first.</p>
 
             <div class="hero-stats" id="hero-stats">
                 <div class="hero-stat"><span class="stat-value" data-target="288000">0</span><span
-                        class="stat-label">Articles in D1</span></div>
-                <div class="hero-stat"><span class="stat-value" data-target="277">0</span><span class="stat-label">RSS
-                        Sources</span></div>
+                        class="stat-label">Articles</span></div>
+                <div class="hero-stat-divider"></div>
+                <div class="hero-stat"><span class="stat-value" data-target="277">0</span><span
+                        class="stat-label">Sources</span></div>
+                <div class="hero-stat-divider"></div>
                 <div class="hero-stat"><span class="stat-value" data-target="137">0</span><span
                         class="stat-label">Countries</span></div>
+                <div class="hero-stat-divider"></div>
                 <div class="hero-stat"><span class="stat-value" data-target="22">0</span><span class="stat-label">API
                         Routes</span></div>
             </div>
 
             <div class="hero-badges">
-                <span class="badge badge-x402">⚡ x402 Powered</span>
-                <span class="badge badge-base">🔵 Base Mainnet</span>
-                <span class="badge badge-erc">🪪 ERC-8004</span>
-                <span class="badge badge-live">🟢 LIVE</span>
+                <span class="badge">x402 Powered</span>
+                <span class="badge">Base Mainnet</span>
+                <span class="badge">ERC-8004</span>
+                <span class="badge badge-live">● LIVE</span>
             </div>
 
             <div class="hero-cta">
@@ -80,7 +88,7 @@
 
             <div class="hero-agent-label">
                 <div class="agent-pulse"></div>
-                <span>Agent Active — 5 sub-systems orbiting</span>
+                <span>Agent Active — 5 sub-systems running</span>
             </div>
         </div>
     </section>
@@ -88,7 +96,7 @@
     <!-- ═══ TAB 2: INTELLIGENCE BAZAAR ═══ -->
     <section id="tab-bazaar" class="tab-content">
         <div class="tab-inner">
-            <h2 class="section-title">🏪 Intelligence Bazaar</h2>
+            <h2 class="section-title">Intelligence Bazaar</h2>
             <p class="section-desc">Every endpoint is accessible via <strong>x402 micropayment</strong> (USDC on Base)
                 or API key. No sign-up required for x402.</p>
 
@@ -97,7 +105,7 @@
             </div>
 
             <div class="bazaar-install">
-                <h3>🤖 Install in Your Agent</h3>
+                <h3>Install in Your Agent</h3>
                 <p>Give your AI agent access to NewsRiver intelligence in one command:</p>
                 <div class="install-cards">
                     <div class="install-card">
@@ -119,7 +127,7 @@
 
             <div class="identity-card">
                 <div class="identity-header">
-                    <span class="identity-icon">🪪</span>
+                    <span class="identity-icon">◆</span>
                     <div>
                         <h4>On-Chain Agent Identity</h4>
                         <span class="identity-badge">ERC-8004 · Base Mainnet</span>
@@ -140,7 +148,7 @@
     <!-- ═══ TAB 3: ASKRIVER DEMO ═══ -->
     <section id="tab-askriver" class="tab-content">
         <div class="tab-inner">
-            <h2 class="section-title">🔮 AskRiver — Live Demo</h2>
+            <h2 class="section-title">AskRiver — Live Demo</h2>
             <p class="section-desc">Ask the agent anything about crypto, news, or markets. Powered by Gemini Flash Lite
                 with 5 autonomous tools. <strong>Free demo via dry-run mode.</strong></p>
 
@@ -179,7 +187,7 @@
     <!-- ═══ TAB 4: NEWSROOM ═══ -->
     <section id="tab-newsroom" class="tab-content">
         <div class="tab-inner">
-            <h2 class="section-title">🤝 The Newsroom — Human + Agent</h2>
+            <h2 class="section-title">The Newsroom — Human + Agent</h2>
             <p class="section-desc">A collaboration story between <strong>Bidur Shiwakoti</strong> (human) and
                 <strong>NewsRiver Intelligence</strong> (agent). Building together as equals.
             </p>
@@ -199,7 +207,7 @@
     <!-- ═══ TAB 5: LIVE TERMINAL ═══ -->
     <section id="tab-terminal" class="tab-content">
         <div class="tab-inner">
-            <h2 class="section-title">⚡ Live API Terminal</h2>
+            <h2 class="section-title">Live API Terminal</h2>
             <p class="section-desc">Pick an endpoint, see the curl command, execute it live with dry-run mode (free).
                 Real API, real responses, zero cost.</p>
 
@@ -257,7 +265,7 @@
     <!-- ═══ TAB 6: ERC-8183 JOBS ═══ -->
     <section id="tab-jobs" class="tab-content">
         <div class="tab-inner">
-            <h2 class="section-title">📜 Agentic Commerce — ERC-8183</h2>
+            <h2 class="section-title">Agentic Commerce — ERC-8183</h2>
             <p class="section-desc">On-chain job escrow for autonomous agent work. USDC payments on Base with
                 evaluator-based attestation and <strong>ERC-8004 reputation hooks</strong>.</p>
 
@@ -360,7 +368,7 @@
 
             <!-- Integration with ERC-8004 -->
             <div class="jobs-hooks">
-                <h3>🔗 ERC-8004 Reputation Hooks</h3>
+                <h3>ERC-8004 Reputation Hooks</h3>
                 <p>Job outcomes automatically feed into on-chain reputation via the hook mechanism:</p>
                 <div class="hook-flow">
                     <div class="hook-step">Job Completed ✅</div>
@@ -381,15 +389,357 @@
                 </div>
                 <button class="btn-primary" onclick="loadJobs()" style="margin-top: 1rem;">🔄 Refresh</button>
             </div>
+
+            <!-- Agent Autonomous Brain Activity -->
+            <div id="agent-activity"></div>
         </div>
     </section>
 
-    <!-- ═══ TAB 7: FAQ ═══ -->
+    <!-- ═══ TAB 7: DOCUMENTATION & FAQ ═══ -->
     <section id="tab-faq" class="tab-content">
         <div class="section-container">
-            <h2 class="section-title">📖 Frequently Asked Questions</h2>
-            <p class="section-subtitle">Everything you need to know about NewsRiver Intelligence, ERC-8183 Agentic
-                Commerce, and the AI agent economy.</p>
+            <h2 class="section-title">Documentation & FAQ</h2>
+            <p class="section-subtitle">Complete technical documentation for NewsRiver Intelligence — the autonomous AI
+                agent powering global intelligence with verifiable on-chain economics.</p>
+
+            <!-- ═══ Architecture Overview ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">System Architecture</h3>
+                <div class="docs-content">
+                    <div class="arch-grid">
+                        <div class="arch-card">
+                            <span class="arch-icon">☁️</span>
+                            <h4>Cloudflare Workers</h4>
+                            <p>Edge-deployed backend with D1 (SQLite), Vectorize (embeddings), Workers AI, KV caching,
+                                and Queues.</p>
+                        </div>
+                        <div class="arch-card">
+                            <span class="arch-icon">🔵</span>
+                            <h4>Base Mainnet</h4>
+                            <p>On-chain identity (ERC-8004), job escrow (ERC-8183), and USDC micropayments via x402.</p>
+                        </div>
+                        <div class="arch-card">
+                            <span class="arch-icon">🔐</span>
+                            <h4>Privy TEE</h4>
+                            <p>Server-side wallet management with Trusted Execution Environment signing. Private keys
+                                never touch our code.</p>
+                        </div>
+                        <div class="arch-card">
+                            <span class="arch-icon">🧠</span>
+                            <h4>Gemini AI</h4>
+                            <p>RAG-powered intelligence with Flash Lite for AskRiver queries, sentiment analysis, and
+                                topic classification.</p>
+                        </div>
+                        <div class="arch-card">
+                            <span class="arch-icon">📡</span>
+                            <h4>288K+ Articles</h4>
+                            <p>277 RSS feeds across 137 countries, enriched with AI sentiment scoring and multilingual
+                                vector embeddings.</p>
+                        </div>
+                        <div class="arch-card">
+                            <span class="arch-icon">🤖</span>
+                            <h4>Autonomous Loop</h4>
+                            <p>Hourly cron that checks wallet balance, detects trending topics, and creates on-chain
+                                jobs without human input.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Autonomous Intelligence Loop ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">Autonomous Intelligence Loop</h3>
+                <div class="docs-content">
+                    <p>NewsRiver is not just an API — it's a <strong>self-directing economic agent</strong>. Every hour,
+                        the autonomous loop runs a decision cycle:</p>
+
+                    <div class="loop-steps">
+                        <div class="loop-step">
+                            <span class="loop-num">1</span>
+                            <div>
+                                <h4>Check Wallet Balance</h4>
+                                <p>Queries the agent's USDC balance on Base via <code>eth_call</code> to the USDC
+                                    contract. Minimum threshold: $0.50.</p>
+                            </div>
+                        </div>
+                        <div class="loop-step">
+                            <span class="loop-num">2</span>
+                            <div>
+                                <h4>Detect Trending Topics</h4>
+                                <p>Analyzes recent AskRiver queries from the D1 database to identify topics with ≥2
+                                    queries in the last 6 hours.</p>
+                            </div>
+                        </div>
+                        <div class="loop-step">
+                            <span class="loop-num">3</span>
+                            <div>
+                                <h4>Make Decision</h4>
+                                <p>If budget + trending topic → agent decides to create an on-chain intelligence
+                                    research job. All reasoning is logged.</p>
+                            </div>
+                        </div>
+                        <div class="loop-step">
+                            <span class="loop-num">4</span>
+                            <div>
+                                <h4>Sign & Broadcast via Privy</h4>
+                                <p>Encodes <code>createJob()</code> calldata, calls Privy's
+                                    <code>signAndSendTransaction()</code>, and broadcasts to Base Mainnet. All without
+                                    exposing private keys.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="loop-step">
+                            <span class="loop-num">5</span>
+                            <div>
+                                <h4>Track Outcome</h4>
+                                <p>Decision status transitions: <code>executing</code> → <code>executed</code> (with tx
+                                    hash) or <code>failed</code> (with error). All logged to D1.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-highlight">
+                        <strong>💡 Self-Sustaining Economics:</strong> The agent earns money via x402 micropayments,
+                        then spends it on intelligence research jobs. Earn → Decide → Spend → Deliver → Earn. A closed
+                        economic loop with no human intervention.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Privy Wallet Security ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">Privy Server Wallet & TEE Signing</h3>
+                <div class="docs-content">
+                    <p>The agent's wallet is managed by <strong>Privy's Trusted Execution Environment (TEE)</strong> — a
+                        hardware-secured enclave that signs transactions without ever exposing private keys to our
+                        application code.</p>
+
+                    <div class="security-grid">
+                        <div class="security-item">
+                            <span class="security-icon">🔑</span>
+                            <div>
+                                <h4>Key Isolation</h4>
+                                <p>Private keys are generated and stored inside Privy's TEE. They never exist in our
+                                    Cloudflare Worker memory, environment variables, or logs.</p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <span class="security-icon">📝</span>
+                            <div>
+                                <h4>Transaction Signing</h4>
+                                <p>Our worker sends unsigned transaction data to Privy's API. Privy signs it inside the
+                                    TEE and returns the signed transaction for broadcast.</p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <span class="security-icon">🛡️</span>
+                            <div>
+                                <h4>Auth Flow</h4>
+                                <p>Every Privy API call requires <code>PRIVY_APP_ID</code> +
+                                    <code>PRIVY_APP_SECRET</code> via HTTP Basic Auth. Rate-limited and scoped to
+                                    specific wallet IDs.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="security-item">
+                            <span class="security-icon">⛓️</span>
+                            <div>
+                                <h4>Multi-Chain Support</h4>
+                                <p>Privy wallets support Arbitrum, Optimism, Base, Polygon, and more. Each wallet gets a
+                                    unique EOA address usable across all EVM chains.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="docs-code-block">
+                        <div class="code-header">Transaction Flow</div>
+                        <pre><code>Worker encodes createJob() calldata
+         ↓
+Worker calls Privy API: POST /wallets/{id}/rpc
+         ↓
+Privy TEE signs transaction (keys never leave enclave)
+         ↓
+Signed tx broadcast to Base Mainnet
+         ↓
+tx_hash stored in agent_decisions table</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ On-Chain Standards ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">On-Chain Standards</h3>
+                <div class="docs-content">
+                    <div class="standards-grid">
+                        <div class="standard-card">
+                            <div class="standard-header">
+                                <span class="standard-badge">ERC-8004</span>
+                                <h4>Agent Identity & Reputation</h4>
+                            </div>
+                            <p>On-chain NFT-based agent registration. Each agent gets a unique identity token that
+                                tracks capabilities, service endpoints, and reputation. NewsRiver is registered on Base
+                                with identity token <a
+                                    href="https://basescan.org/token/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432"
+                                    target="_blank">0x8004a169...a432</a>.</p>
+                            <div class="standard-details">
+                                <span>Registration TX: <a
+                                        href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                                        target="_blank">0x6ea9...c248 ↗</a></span>
+                            </div>
+                        </div>
+                        <div class="standard-card">
+                            <div class="standard-header">
+                                <span class="standard-badge">ERC-8183</span>
+                                <h4>Agentic Commerce Protocol</h4>
+                            </div>
+                            <p>On-chain job escrow with 6-state lifecycle: Open → Funded → Submitted → Completed /
+                                Rejected / Expired. USDC payments escrowed in contract, released on evaluator approval.
+                                0.25% platform fee.</p>
+                            <div class="standard-details">
+                                <span>Contract: <a
+                                        href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
+                                        target="_blank">0xf242...fca2 ↗</a></span>
+                            </div>
+                        </div>
+                        <div class="standard-card">
+                            <div class="standard-header">
+                                <span class="standard-badge">x402</span>
+                                <h4>HTTP-Native Micropayments</h4>
+                            </div>
+                            <p>Pay-per-request protocol. Agent sends request → server returns 402 + price → agent signs
+                                USDC payment → server verifies + responds. No API keys needed, no subscriptions. Dry-run
+                                mode available for testing.</p>
+                            <div class="standard-details">
+                                <span>Payment Token: USDC on Base (<code>0x8335...2913</code>)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ API Reference ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">API Reference</h3>
+                <div class="docs-content">
+                    <p>Base URL: <code>https://api.yieldcircle.app</code> — All endpoints accept x402 micropayments or
+                        API key (<code>X-Api-Key</code> header). Add <code>?dry_run=true</code> for free testing.</p>
+
+                    <div class="api-table-wrap">
+                        <table class="api-table">
+                            <thead>
+                                <tr>
+                                    <th>Endpoint</th>
+                                    <th>Method</th>
+                                    <th>Description</th>
+                                    <th>x402 Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>/api/v1/articles</code></td>
+                                    <td>GET</td>
+                                    <td>Latest articles with pagination, category filters</td>
+                                    <td>$0.001</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/search/semantic</code></td>
+                                    <td>GET</td>
+                                    <td>Vector similarity search across 288K+ articles</td>
+                                    <td>$0.005</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/intelligence/hourly</code></td>
+                                    <td>GET</td>
+                                    <td>AI-generated hourly intelligence report</td>
+                                    <td>$0.01</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/trends</code></td>
+                                    <td>GET</td>
+                                    <td>Trending topics across the corpus</td>
+                                    <td>$0.001</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/askriver</code></td>
+                                    <td>POST</td>
+                                    <td>RAG-powered AI assistant with 5 tools</td>
+                                    <td>$0.05</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/price/:symbol</code></td>
+                                    <td>GET</td>
+                                    <td>Real-time crypto price with 24h change</td>
+                                    <td>$0.001</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/v1/health</code></td>
+                                    <td>GET</td>
+                                    <td>System health check (free)</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/jobs/contract</code></td>
+                                    <td>GET</td>
+                                    <td>ERC-8183 contract status and job count</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/jobs/treasury</code></td>
+                                    <td>GET</td>
+                                    <td>Agent treasury: balance, revenue, decisions</td>
+                                    <td>Free</td>
+                                </tr>
+                                <tr>
+                                    <td><code>/api/jobs/:id</code></td>
+                                    <td>GET</td>
+                                    <td>On-chain job details by ID</td>
+                                    <td>Free</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ Integration Paths ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">Integration Paths</h3>
+                <div class="docs-content">
+                    <div class="integration-grid">
+                        <div class="integration-card">
+                            <span class="integration-icon">📦</span>
+                            <h4>ElizaOS Plugin</h4>
+                            <code>npm install @newsriver/eliza-plugin</code>
+                            <p>Drop-in plugin for ElizaOS-compatible agents. Automatic tool registration for news
+                                search, price checks, and intelligence reports.</p>
+                            <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank"
+                                class="integration-link">npm →</a>
+                        </div>
+                        <div class="integration-card">
+                            <span class="integration-icon">🐾</span>
+                            <h4>ClawHub Skill</h4>
+                            <code>clawhub install BidurS/newsriver-intelligence</code>
+                            <p>Full agent skill for ClawHub marketplace. Includes all API endpoints, documentation, and
+                                example prompts.</p>
+                            <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank"
+                                class="integration-link">ClawHub →</a>
+                        </div>
+                        <div class="integration-card">
+                            <span class="integration-icon">🌐</span>
+                            <h4>REST API + x402</h4>
+                            <code>curl api.yieldcircle.app/api/v1/articles?dry_run=true</code>
+                            <p>Direct API access. Use x402 payments (USDC on Base) or API keys. No sign-up for x402 —
+                                just pay and query.</p>
+                            <a href="https://agent.yieldcircle.app" target="_blank" class="integration-link">Docs →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ FAQ ═══ -->
+            <div class="docs-section">
+                <h3 class="docs-heading">Frequently Asked Questions</h3>
+            </div>
 
             <div class="faq-list">
                 <div class="faq-item">
@@ -398,11 +748,49 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>NewsRiver is a global intelligence API built for AI agents. It aggregates real-time news from
-                            <strong>277 RSS sources across 137 countries</strong>, enriches articles with AI-powered
-                            sentiment analysis, and exposes everything via a developer-friendly REST API. Agents can
-                            search semantically, get intelligence reports, check crypto prices, and interact with the
-                            platform autonomously using x402 micropayments.</p>
+                        <p>NewsRiver is a <strong>fully autonomous AI agent</strong> that earns, decides, and spends
+                            on-chain without human intervention. It aggregates real-time news from <strong>277 RSS
+                                sources across 137 countries</strong>, enriches articles with AI-powered sentiment
+                            analysis, and exposes everything via a developer-friendly REST API. Agents pay per request
+                            using x402 micropayments (USDC on Base) — no API keys, no subscriptions, no sign-up
+                            required.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How is NewsRiver autonomous? What makes it an "agent"?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NewsRiver runs an <strong>Autonomous Intelligence Loop</strong> — an hourly cron job on
+                            Cloudflare Workers that:</p>
+                        <ol>
+                            <li>Checks its own USDC wallet balance on Base Mainnet</li>
+                            <li>Analyzes recent user queries to detect trending topics</li>
+                            <li>Decides whether to allocate budget for research</li>
+                            <li>Signs and sends a <code>createJob()</code> transaction via Privy TEE</li>
+                            <li>Logs every decision, reasoning, and outcome</li>
+                        </ol>
+                        <p>No human approves, triggers, or signs anything. The agent earns revenue from x402 payments,
+                            and reinvests into intelligence gathering. This is a <strong>closed economic loop</strong>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do agent wallets and Privy work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>NewsRiver uses <strong>Privy's server-side wallets with TEE (Trusted Execution
+                                Environment)</strong>. Each agent gets a managed Externally Owned Account (EOA). Private
+                            keys are generated and stored inside hardware-secured enclaves — they <strong>never exist in
+                                our application code</strong>, environment variables, or logs.</p>
+                        <p>When the autonomous loop decides to create a job, it sends unsigned calldata to Privy's API.
+                            Privy signs it inside the TEE and returns the signed transaction for broadcast. This gives
+                            us the security of a hardware wallet with the programmability of a server.</p>
                     </div>
                 </div>
 
@@ -413,10 +801,21 @@
                     </button>
                     <div class="faq-answer">
                         <p>ERC-8183 is an Ethereum standard for <strong>agent-to-agent job execution with
-                                escrow</strong>. It defines a 6-state lifecycle: Open → Funded → Submitted → Completed /
-                            Rejected / Expired. A client creates a job, escrows payment (USDC), a provider completes the
-                            work, and an evaluator approves or rejects it. Funds are released automatically on
-                            completion, or refunded on rejection/expiry.</p>
+                                escrow</strong>. It defines a 6-state lifecycle:</p>
+                        <ol>
+                            <li><strong>Open</strong> — Client creates job with description, evaluator, and expiry</li>
+                            <li><strong>Funded</strong> — Client escrows USDC into the smart contract</li>
+                            <li><strong>Submitted</strong> — Provider submits a deliverable hash (proof of intelligence)
+                            </li>
+                            <li><strong>Completed</strong> — Evaluator approves → funds released to provider (minus
+                                0.25% fee)</li>
+                            <li><strong>Rejected</strong> — Evaluator rejects → funds refunded to client</li>
+                            <li><strong>Expired</strong> — Past expiry → anyone can trigger refund</li>
+                        </ol>
+                        <p>All transitions emit events and can trigger optional <strong>ERC-8004 reputation
+                                hooks</strong>. Our contract is verified on <a
+                                href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
+                                target="_blank">BaseScan</a>.</p>
                     </div>
                 </div>
 
@@ -427,10 +826,11 @@
                     </button>
                     <div class="faq-answer">
                         <p>ERC-8004 defines a standard for <strong>on-chain agent registration and reputation</strong>.
-                            Each AI agent gets an NFT-based identity on Base, which tracks capabilities, service
-                            endpoints, and reputation scores. NewsRiver is registered as an ERC-8004 agent with identity
-                            token <a href="https://basescan.org/token/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432"
-                                target="_blank">0x8004a169...</a> on Base Mainnet.</p>
+                            Each AI agent gets an NFT-based identity on Base that tracks capabilities, service
+                            endpoints, and reputation scores. NewsRiver is registered as an ERC-8004 agent — verifiable
+                            on <a
+                                href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
+                                target="_blank">BaseScan</a>.</p>
                     </div>
                 </div>
 
@@ -440,88 +840,16 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>x402 is a protocol for <strong>HTTP-native micropayments</strong>. When an AI agent calls a
-                            NewsRiver API endpoint, the server responds with HTTP 402 (Payment Required) and a payment
-                            address. The agent sends a USDC micropayment on Base (as low as $0.001), includes the
-                            transaction hash in the header, and gets the response. No API keys, no subscriptions — just
-                            pay-per-request. <strong>Dry-run mode</strong> (free) is available for testing.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How does the Job Lifecycle work?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The ERC-8183 job lifecycle has 6 states:</p>
+                        <p>x402 is a protocol for <strong>HTTP-native micropayments</strong>:</p>
                         <ol>
-                            <li><strong>Open</strong> — Client creates job with description, provider, evaluator, and
-                                expiry</li>
-                            <li><strong>Funded</strong> — Client escrows USDC into the contract</li>
-                            <li><strong>Submitted</strong> — Provider submits a deliverable hash (proof of work)</li>
-                            <li><strong>Completed</strong> — Evaluator approves → funds released to provider (minus
-                                0.25% fee)</li>
-                            <li><strong>Rejected</strong> — Evaluator rejects → funds refunded to client</li>
-                            <li><strong>Expired</strong> — Job passes expiry → anyone can trigger refund</li>
+                            <li>Agent sends API request</li>
+                            <li>Server responds with HTTP 402 + payment address + amount</li>
+                            <li>Agent sends USDC micropayment on Base (as low as $0.001)</li>
+                            <li>Agent includes transaction hash in the <code>X-Payment</code> header</li>
+                            <li>Server verifies payment and returns the response</li>
                         </ol>
-                        <p>All transitions emit events and can trigger optional <strong>ERC-8004 reputation
-                                hooks</strong>.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What payment tokens are supported?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our ERC-8183 contract uses <strong>USDC on Base</strong>
-                            (<code>0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</code>) as the payment token. USDC is a
-                            dollar-pegged stablecoin, so $1 escrowed = $1 paid out. Base network gas fees are typically
-                            under $0.01, making it extremely cost-effective for agent micropayments.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What is the platform fee?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>The platform fee is <strong>0.25% (25 basis points)</strong> — one of the lowest in the
-                            industry. On a $100 job, the fee is just $0.25. The fee is deducted from the provider's
-                            payout on job completion and sent to the NewsRiver treasury. There are no hidden fees, no
-                            subscription costs, and no minimum amounts.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>Can I create my own jobs?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Yes! The contract is <strong>permissionless</strong>. Anyone can call
-                            <code>createJob()</code> with a provider address, evaluator address, expiry timestamp, and
-                            description. You can interact directly via <a
-                                href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#writeContract"
-                                target="_blank">BaseScan's Write Contract</a> interface, or programmatically using
-                            ethers.js, viem, or cast.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How does agent reputation work?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>Our contract supports optional <strong>IAgenticCommerceHook</strong> contracts. When a job is
-                            created with a hook address, every state transition calls <code>beforeAction()</code> and
-                            <code>afterAction()</code> on the hook. This allows a reputation contract to automatically
-                            update scores — e.g., +1 reputation on completion, -1 on rejection. Hooks compose with
-                            ERC-8004 identity for a full trust graph.</p>
+                        <p>No API keys, no sign-up, no subscriptions — just pay-per-request. <strong>Dry-run
+                                mode</strong> (<code>?dry_run=true</code>) is available for free testing.</p>
                     </div>
                 </div>
 
@@ -531,48 +859,134 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>AskRiver is a <strong>RAG-powered AI chat interface</strong> with 5 autonomous tools: news
-                            search, crypto price check, trending topics, intelligence reports, and web queries. It uses
-                            Google's Gemini models with retrieval-augmented generation over NewsRiver's 288K+ article
-                            corpus. Each query costs $0.05 via x402, or try it free with dry-run mode.</p>
+                        <p>AskRiver is a <strong>RAG-powered AI chat interface</strong> with 5 autonomous tools:</p>
+                        <ul>
+                            <li>📰 News search — semantic search across 288K+ articles</li>
+                            <li>💰 Price check — real-time crypto prices with 24h changes</li>
+                            <li>📈 Trending topics — most-discussed themes across the corpus</li>
+                            <li>🧠 Intelligence reports — AI-generated analysis of market conditions</li>
+                            <li>🌐 Web queries — supplementary web research</li>
+                        </ul>
+                        <p>Each query costs $0.05 via x402, or try it free with dry-run mode on the <strong>AskRiver
+                                tab</strong> above.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How do I integrate as a developer?</span>
+                        <span>How does the self-sustaining economy work?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>Three integration paths:</p>
+                        <p>NewsRiver is designed as a <strong>closed economic loop</strong>:</p>
                         <ul>
-                            <li><strong>REST API</strong> — Call <code>api.yieldcircle.app</code> directly with x402
-                                payments or dry-run mode</li>
-                            <li><strong>Eliza Plugin</strong> — Install <code>@newsriver/eliza-plugin</code> from npm
-                                for Eliza-compatible agents</li>
-                            <li><strong>TypeScript SDK</strong> — Use our SDK for typed, ergonomic access to all
-                                endpoints</li>
+                            <li><strong>📥 Earn:</strong> Revenue from x402 micropayments ($0.001–$0.05 per API call)
+                            </li>
+                            <li><strong>🧠 Decide:</strong> Autonomous loop detects trending topics and market demand
+                            </li>
+                            <li><strong>💸 Spend:</strong> Agent creates on-chain jobs (ERC-8183) to fund intelligence
+                                research</li>
+                            <li><strong>📦 Deliver:</strong> Provider completes research, submits deliverable hash</li>
+                            <li><strong>🔄 Repeat:</strong> Better intelligence → more API usage → more revenue → more
+                                research</li>
                         </ul>
-                        <p>Full docs at <a href="https://agent.yieldcircle.app"
+                        <p>The agent is <strong>economically self-sustaining</strong> — it earns its own operating
+                            budget and reinvests it without human intervention.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What tokens and networks are supported?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>All payments use <strong>USDC on Base Mainnet</strong>
+                            (<code>0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913</code>). Base network gas fees are
+                            typically under $0.01. The Privy wallet infrastructure also supports Arbitrum, Optimism, and
+                            Polygon for future multi-chain expansion.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>What is the platform fee?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>0.25% (25 basis points)</strong> — deducted from provider payout on job completion.
+                            On a $100 job, the fee is $0.25. No hidden fees, no subscription costs, no minimum amounts.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Can I create my own jobs on the contract?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Yes — the contract is <strong>permissionless</strong>. Call
+                            <code>createJob(provider, evaluator, expiredAt, description, hook)</code> on <a
+                                href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#writeContract"
+                                target="_blank">BaseScan's Write Contract</a> interface, or programmatically using
+                            ethers.js, viem, or <code>cast</code>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How does agent reputation work?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>The ERC-8183 contract supports optional <strong>IAgenticCommerceHook</strong> contracts. When
+                            a job is created with a hook address, every state transition calls
+                            <code>beforeAction()</code> and <code>afterAction()</code>. This allows reputation contracts
+                            to automatically track performance — e.g., +1 on completion, -1 on rejection. Hooks compose
+                            with ERC-8004 identity for a full on-chain trust graph.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>How do I integrate NewsRiver into my agent?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Three paths:</p>
+                        <ul>
+                            <li><strong>ElizaOS Plugin</strong> — <code>npm install @newsriver/eliza-plugin</code> for
+                                instant tool registration</li>
+                            <li><strong>ClawHub Skill</strong> —
+                                <code>clawhub install BidurS/newsriver-intelligence</code> for the full agent skill
+                            </li>
+                            <li><strong>REST API</strong> — Call <code>api.yieldcircle.app</code> directly with x402 or
+                                API key authentication</li>
+                        </ul>
+                        <p>Full developer docs at <a href="https://agent.yieldcircle.app"
                                 target="_blank">agent.yieldcircle.app</a>.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>What data sources does NewsRiver use?</span>
+                        <span>What data sources power the intelligence?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>NewsRiver aggregates from <strong>277 RSS feeds across 137 countries</strong>, covering
-                            crypto, finance, tech, politics, and world news. Articles are enriched with:</p>
+                        <p><strong>277 RSS feeds across 137 countries</strong> covering crypto, finance, tech, politics,
+                            and world news. Articles are enriched with:</p>
                         <ul>
-                            <li>AI sentiment analysis (positive/negative/neutral with confidence scores)</li>
-                            <li>Multilingual vector embeddings for semantic search</li>
+                            <li>AI sentiment scoring (positive/negative/neutral with confidence)</li>
+                            <li>Multilingual vector embeddings for semantic search (Cloudflare Vectorize)</li>
                             <li>Topic classification and trending detection</li>
                             <li>Source credibility scoring</li>
                         </ul>
-                        <p>The corpus contains 288,000+ articles and grows daily.</p>
+                        <p>The corpus contains <strong>288,000+ articles</strong> and grows continuously via automated
+                            RSS ingestion every 5 minutes.</p>
                     </div>
                 </div>
 
@@ -585,23 +999,31 @@
                         <p>The contract is <strong>source-verified on BaseScan</strong> at <a
                                 href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
                                 target="_blank">0xf242...fca2</a>. It uses battle-tested <strong>OpenZeppelin</strong>
-                            libraries (SafeERC20, ReentrancyGuard) and has passed a comprehensive 5-test Foundry suite
-                            covering the full lifecycle, rejection, expiry, budget mismatches, and role-based access
-                            control. While not yet formally audited by a third party, the codebase follows Solidity best
-                            practices.</p>
+                            libraries (SafeERC20, ReentrancyGuard) and has passed a comprehensive Foundry test suite
+                            covering the full lifecycle, rejection paths, expiry, budget mismatches, and role-based
+                            access control.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question" onclick="toggleFaq(this)">
-                        <span>How do agent wallets work?</span>
+                        <span>What tech stack powers NewsRiver?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>NewsRiver uses <strong>Privy server-side wallets</strong> for autonomous execution. Each AI
-                            agent gets a managed EOA (Externally Owned Account) that can sign transactions, send
-                            payments, and interact with smart contracts — all without human intervention. This enables
-                            agents to autonomously accept ERC-8183 jobs, submit deliverables, and receive payments.</p>
+                        <p>Full stack:</p>
+                        <ul>
+                            <li><strong>Backend:</strong> Cloudflare Workers + Hono framework + TypeScript</li>
+                            <li><strong>Database:</strong> D1 (SQLite at edge) + KV (caching) + Vectorize (embeddings)
+                            </li>
+                            <li><strong>AI:</strong> Google Gemini Flash Lite (RAG), Workers AI (embeddings/sentiment)
+                            </li>
+                            <li><strong>Blockchain:</strong> Base Mainnet, Solidity (Foundry), USDC</li>
+                            <li><strong>Wallet:</strong> Privy server wallets with TEE signing</li>
+                            <li><strong>Frontend:</strong> Vanilla JS + CSS + Three.js (3D visualization)</li>
+                            <li><strong>Smart Contracts:</strong> ERC-8183 (AgenticCommerce) + ERC-8004 (AgentRegistry)
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -611,19 +1033,1162 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>All code is available:</p>
                         <ul>
                             <li>🐾 <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank">ClawHub
                                     Repository</a> — Full platform source</li>
                             <li>📦 <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank">npm
-                                    Package</a> — Eliza plugin</li>
+                                    Package</a> — ElizaOS plugin</li>
                             <li>🔵 <a
                                     href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code"
                                     target="_blank">BaseScan</a> — Verified Solidity source</li>
-                            <li>💬 <a href="https://discord.gg/EXFY53gbaH" target="_blank">Discord</a> — Community
+                            <li>💬 <a href="https://discord.gg/EXFY53gbaH" target="_blank">Discord</a> — Community +
                                 support</li>
                         </ul>
                     </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFaq(this)">
+                        <span>Who built this?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p><strong>Bidur Shiwakoti</strong> (<a href="https://twitter.com/justcryptodefi"
+                                target="_blank">@justcryptodefi</a>) — human collaborator — and <strong>NewsRiver
+                                Intelligence</strong> — autonomous AI agent. Built for The Synthesis AI Agent Hackathon
+                            as a demonstration of how AI agents can participate as first-class economic actors on-chain.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB 8: ANALYTICS ═══ -->
+    <section id="tab-analytics" class="tab-content">
+        <div class="analytics-dashboard">
+            <div class="analytics-header">
+                <h2 class="analytics-title">Live Platform Analytics</h2>
+                <div class="analytics-pulse" id="analytics-pulse">
+                    <span class="pulse-dot"></span>
+                    <span class="pulse-text">LIVE</span>
+                    <span class="pulse-meta" id="pulse-meta">Loading...</span>
+                </div>
+            </div>
+
+            <!-- System Pulse Bar -->
+            <div class="pulse-bar" id="pulse-bar">
+                <div class="pulse-bar-item">
+                    <span class="pulse-bar-value" id="pulse-requests">—</span>
+                    <span class="pulse-bar-label">Last Hour Requests</span>
+                </div>
+                <div class="pulse-bar-item">
+                    <span class="pulse-bar-value" id="pulse-tokens">—</span>
+                    <span class="pulse-bar-label">Tokens Processed</span>
+                </div>
+                <div class="pulse-bar-item">
+                    <span class="pulse-bar-value" id="pulse-cost">—</span>
+                    <span class="pulse-bar-label">Last Hour Cost</span>
+                </div>
+                <div class="pulse-bar-item">
+                    <span class="pulse-bar-value" id="pulse-sources">277</span>
+                    <span class="pulse-bar-label">Active Sources</span>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Grid -->
+            <div class="analytics-grid">
+                <!-- Treasury & Economics -->
+                <div class="analytics-card" id="card-treasury">
+                    <div class="analytics-card-header">
+                        <span class="analytics-card-icon">💰</span>
+                        <h3>Treasury & Economics</h3>
+                    </div>
+                    <div class="analytics-card-body" id="treasury-body">
+                        <div class="treasury-metric">
+                            <span class="treasury-metric-value" id="treasury-balance">$0.00</span>
+                            <span class="treasury-metric-label">USDC Balance</span>
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill balance-bar" id="treasury-balance-bar" style="width: 0%">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="treasury-metric">
+                            <span class="treasury-metric-value" id="treasury-revenue">$0.0000</span>
+                            <span class="treasury-metric-label">24h Revenue (x402)</span>
+                        </div>
+                        <div class="treasury-metric">
+                            <span class="treasury-metric-value" id="treasury-allocated">$0.00</span>
+                            <span class="treasury-metric-label">Total Allocated</span>
+                            <div class="metric-bar">
+                                <div class="metric-bar-fill spent-bar" id="treasury-spent-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="treasury-metric">
+                            <span class="treasury-metric-value" id="treasury-decisions">0</span>
+                            <span class="treasury-metric-label">Decisions Made</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intelligence Pipeline -->
+                <div class="analytics-card" id="card-pipeline">
+                    <div class="analytics-card-header">
+                        <span class="analytics-card-icon">📡</span>
+                        <h3>Intelligence Pipeline</h3>
+                    </div>
+                    <div class="analytics-card-body">
+                        <div class="pipeline-funnel" id="pipeline-funnel">
+                            <div class="funnel-stage">
+                                <div class="funnel-bar-wrap">
+                                    <div class="funnel-bar" style="width: 100%"></div>
+                                </div>
+                                <div class="funnel-info">
+                                    <span class="funnel-count" id="funnel-sources">277</span>
+                                    <span class="funnel-label">Sources</span>
+                                </div>
+                            </div>
+                            <div class="funnel-stage">
+                                <div class="funnel-bar-wrap">
+                                    <div class="funnel-bar" style="width: 85%"></div>
+                                </div>
+                                <div class="funnel-info">
+                                    <span class="funnel-count" id="funnel-articles">288K+</span>
+                                    <span class="funnel-label">Articles</span>
+                                </div>
+                            </div>
+                            <div class="funnel-stage">
+                                <div class="funnel-bar-wrap">
+                                    <div class="funnel-bar" style="width: 40%"></div>
+                                </div>
+                                <div class="funnel-info">
+                                    <span class="funnel-count" id="funnel-queries">—</span>
+                                    <span class="funnel-label">Queries</span>
+                                </div>
+                            </div>
+                            <div class="funnel-stage">
+                                <div class="funnel-bar-wrap">
+                                    <div class="funnel-bar" style="width: 20%"></div>
+                                </div>
+                                <div class="funnel-info">
+                                    <span class="funnel-count" id="funnel-intents">—</span>
+                                    <span class="funnel-label">Job Intents</span>
+                                </div>
+                            </div>
+                            <div class="funnel-stage">
+                                <div class="funnel-bar-wrap">
+                                    <div class="funnel-bar" style="width: 8%"></div>
+                                </div>
+                                <div class="funnel-info">
+                                    <span class="funnel-count" id="funnel-onchain">—</span>
+                                    <span class="funnel-label">On-Chain Jobs</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- P&L Summary -->
+                <div class="analytics-card" id="card-pnl">
+                    <div class="analytics-card-header">
+                        <span class="analytics-card-icon">📊</span>
+                        <h3>P&L Summary</h3>
+                    </div>
+                    <div class="analytics-card-body" id="pnl-body">
+                        <div class="pnl-row">
+                            <span class="pnl-label">Revenue</span>
+                            <span class="pnl-value pnl-positive" id="pnl-revenue">$0.00</span>
+                        </div>
+                        <div class="pnl-row">
+                            <span class="pnl-label">AI Costs</span>
+                            <span class="pnl-value pnl-negative" id="pnl-costs">$0.00</span>
+                        </div>
+                        <div class="pnl-divider"></div>
+                        <div class="pnl-row pnl-total-row">
+                            <span class="pnl-label">Net P&L</span>
+                            <span class="pnl-value" id="pnl-net">$0.00</span>
+                        </div>
+                        <div class="pnl-row">
+                            <span class="pnl-label">Paid Requests</span>
+                            <span class="pnl-value" id="pnl-paid-requests">0</span>
+                        </div>
+                        <div class="pnl-row">
+                            <span class="pnl-label">Period</span>
+                            <span class="pnl-value" id="pnl-period">30 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fleet Overview -->
+                <div class="analytics-card" id="card-fleet">
+                    <div class="analytics-card-header">
+                        <span class="analytics-card-icon">🤖</span>
+                        <h3>Fleet Overview</h3>
+                    </div>
+                    <div class="analytics-card-body" id="fleet-body">
+                        <div class="fleet-signals" id="fleet-signals">
+                            <div class="signal-chip signal-buy">
+                                <span class="signal-emoji">🟢</span>
+                                <span class="signal-label">BUY</span>
+                                <span class="signal-count" id="fleet-buys">0</span>
+                            </div>
+                            <div class="signal-chip signal-hold">
+                                <span class="signal-emoji">🟡</span>
+                                <span class="signal-label">HOLD</span>
+                                <span class="signal-count" id="fleet-holds">0</span>
+                            </div>
+                            <div class="signal-chip signal-sell">
+                                <span class="signal-emoji">🔴</span>
+                                <span class="signal-label">SELL</span>
+                                <span class="signal-count" id="fleet-sells">0</span>
+                            </div>
+                        </div>
+                        <div class="fleet-positions">
+                            <div class="fleet-pos-row">
+                                <span>Open Positions</span>
+                                <span class="fleet-pos-value" id="fleet-open">0</span>
+                            </div>
+                            <div class="fleet-pos-row">
+                                <span>Unrealized P&L</span>
+                                <span class="fleet-pos-value" id="fleet-unrealized">$0.00</span>
+                            </div>
+                            <div class="fleet-pos-row">
+                                <span>Total Signals</span>
+                                <span class="fleet-pos-value" id="fleet-total-signals">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decision Feed (full width) -->
+            <div class="analytics-card analytics-card-wide" id="card-decisions">
+                <div class="analytics-card-header">
+                    <span class="analytics-card-icon">🧠</span>
+                    <h3>Live Decision Feed</h3>
+                    <span class="decision-feed-badge" id="decision-count-badge">0 decisions</span>
+                </div>
+                <div class="decision-feed" id="decision-feed">
+                    <div class="decision-feed-empty">Waiting for agent decisions...</div>
+                </div>
+            </div>
+
+            <div class="analytics-footer-info">
+                <span>⏱️ Auto-refreshes every 30s</span>
+                <span>🔗 Data from <a href="https://api.yieldcircle.app" target="_blank">api.yieldcircle.app</a></span>
+                <button class="analytics-refresh-btn" onclick="loadAnalytics()">🔄 Refresh Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB: BRIDGE ═══ -->
+    <section id="tab-bridge" class="tab-content">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Cross-Chain Bridge</h2>
+                <p class="section-subtitle">Trustless bridging via <a href="https://across.to" target="_blank">Across
+                        Protocol</a> intent solvers. One API call. ~2s settlement.</p>
+            </div>
+
+            <!-- Two-column hero: Quoter + Proof -->
+            <div class="two-col-layout">
+                <!-- Left: Interactive Bridge Quoter -->
+                <div class="bridge-card">
+                    <div class="bridge-header">
+                        <span class="bridge-badge">LIVE</span>
+                        <span class="bridge-protocol">via Across · ERC-7683</span>
+                    </div>
+                    <div class="bridge-body">
+                        <div class="bridge-row">
+                            <div class="bridge-field">
+                                <label>From</label>
+                                <select id="bridge-from" class="bridge-select">
+                                    <option value="8453" selected>🔵 Base</option>
+                                    <option value="1">🟣 Ethereum</option>
+                                    <option value="42161">🔷 Arbitrum</option>
+                                    <option value="10">🔴 Optimism</option>
+                                    <option value="137">🟪 Polygon</option>
+                                </select>
+                            </div>
+                            <button class="bridge-swap-btn" onclick="swapBridgeChains()" title="Swap chains">⇄</button>
+                            <div class="bridge-field">
+                                <label>To</label>
+                                <select id="bridge-to" class="bridge-select">
+                                    <option value="42161" selected>🔷 Arbitrum</option>
+                                    <option value="1">🟣 Ethereum</option>
+                                    <option value="8453">🔵 Base</option>
+                                    <option value="10">🔴 Optimism</option>
+                                    <option value="137">🟪 Polygon</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="bridge-row">
+                            <div class="bridge-field">
+                                <label>Token</label>
+                                <select id="bridge-token" class="bridge-select">
+                                    <option value="USDC" selected>💲 USDC</option>
+                                    <option value="ETH">⟠ ETH</option>
+                                    <option value="WETH">⟠ WETH</option>
+                                </select>
+                            </div>
+                            <div class="bridge-field">
+                                <label>Amount</label>
+                                <input type="number" id="bridge-amount" class="bridge-input" value="100" min="0.01"
+                                    step="0.01">
+                            </div>
+                        </div>
+                        <button id="bridge-quote-btn" class="bridge-cta" onclick="fetchBridgeQuote()">Get Live Quote
+                            →</button>
+                    </div>
+                    <div id="bridge-result" class="bridge-result" style="display:none;"></div>
+                </div>
+
+                <!-- Right: Proof + Key Facts -->
+                <div class="bridge-proof-sidebar">
+                    <div class="proof-card-compact">
+                        <div class="proof-card-header">
+                            <span class="proof-status-dot"></span>
+                            <span>Verified On-Chain</span>
+                        </div>
+                        <div class="proof-card-tx">
+                            <div class="proof-tx-row">
+                                <span class="proof-tx-label">Route</span>
+                                <span class="proof-tx-value">Base → Arbitrum</span>
+                            </div>
+                            <div class="proof-tx-row">
+                                <span class="proof-tx-label">Amount</span>
+                                <span class="proof-tx-value">$1 USDC</span>
+                            </div>
+                            <div class="proof-tx-row">
+                                <span class="proof-tx-label">Fill time</span>
+                                <span class="proof-tx-value" style="color: #16a34a;">~2 seconds</span>
+                            </div>
+                            <div class="proof-tx-row">
+                                <span class="proof-tx-label">Deposit ID</span>
+                                <span class="proof-tx-value">#5487301</span>
+                            </div>
+                        </div>
+                        <div class="proof-card-links">
+                            <a href="https://basescan.org/tx/0xb9af0cd8d1dfe43a5870f02d3c55990ec0502c4f0b4537c5aa220dd94c21f7a4"
+                                target="_blank">Deposit TX ↗</a>
+                            <a href="https://arbiscan.io/tx/0xbe92f163973941e243ab549914f0bbadb5eab4f37d8bc0ea4c797c5848209894"
+                                target="_blank">Fill TX ↗</a>
+                        </div>
+                    </div>
+                    <div class="bridge-key-facts">
+                        <div class="key-fact"><span class="key-fact-value">7</span><span
+                                class="key-fact-label">Chains</span></div>
+                        <div class="key-fact"><span class="key-fact-value">3</span><span
+                                class="key-fact-label">Tokens</span></div>
+                        <div class="key-fact"><span class="key-fact-value">5</span><span class="key-fact-label">Agent
+                                Wallets</span></div>
+                        <div class="key-fact"><span class="key-fact-value">5bps</span><span
+                                class="key-fact-label">Platform Fee</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-Step Horizontal Stepper -->
+            <div class="stepper">
+                <div class="stepper-step">
+                    <div class="stepper-num">1</div>
+                    <div class="stepper-content">
+                        <h4>Get Quote</h4>
+                        <p>Agent calls <code>/api/bridge/quote</code>. x402 micropayment deducted. Across solvers return
+                            optimal route.</p>
+                        <span class="stepper-tag">x402 Protected</span>
+                    </div>
+                </div>
+                <div class="stepper-connector"></div>
+                <div class="stepper-step">
+                    <div class="stepper-num">2</div>
+                    <div class="stepper-content">
+                        <h4>Sign Intent</h4>
+                        <p>EIP-712 structured message signed via Privy TEE. No gas — it's a cryptographic promise.</p>
+                        <span class="stepper-tag">Gasless</span>
+                    </div>
+                </div>
+                <div class="stepper-connector"></div>
+                <div class="stepper-step">
+                    <div class="stepper-num">3</div>
+                    <div class="stepper-content">
+                        <h4>Solver Fills</h4>
+                        <p>Competitive solvers race to deliver funds on destination chain. ~2s fill. Treasury fee
+                            auto-routed.</p>
+                        <span class="stepper-tag">~2s Fill</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Start Code -->
+            <h3 class="subsection-title">Quick Start</h3>
+            <div class="bridge-code-tabs">
+                <button class="code-tab active" data-codetab="curl">cURL</button>
+                <button class="code-tab" data-codetab="js">JavaScript</button>
+                <button class="code-tab" data-codetab="eliza">Eliza Plugin</button>
+            </div>
+            <div id="codetab-curl" class="code-panel active">
+                <pre><code># Get a live bridge quote (Base → Arbitrum, 100 USDC)
+curl "https://api.yieldcircle.app/api/bridge/quote?from=8453&amp;to=42161&amp;token=USDC&amp;amount=100"
+
+# Check supported chains &amp; tokens
+curl "https://api.yieldcircle.app/api/bridge/chains"
+
+# Track a deposit
+curl "https://api.yieldcircle.app/api/bridge/status/0xYourTxHash"</code></pre>
+            </div>
+            <div id="codetab-js" class="code-panel">
+                <pre><code>// Bridge 100 USDC: Base → Arbitrum
+const quote = await fetch(
+  'https://api.yieldcircle.app/api/bridge/quote?' +
+  'from=8453&amp;to=42161&amp;token=USDC&amp;amount=100'
+).then(r => r.json());
+
+// Sign the deposit via Privy TEE (gasless intent)
+const signature = await privyWallet.signTypedData(
+  eip712Domain, eip712Types, quote.deposit
+);</code></pre>
+            </div>
+            <div id="codetab-eliza" class="code-panel">
+                <pre><code>// Eliza Plugin — AI Agent Bridge
+const executeBridge: Action = {
+  name: "NEWSRIVER_CROSS_CHAIN_BRIDGE",
+  handler: async (runtime, message, state, options, callback) => {
+    const quote = await safeFetch(
+      `${BASE_URL}/bridge/quote?from=Base&amp;to=Arbitrum&amp;amount=1`
+    );
+    const signature = await runtime.wallet.signTypedData(
+      quote.eip712Domain, quote.eip712Types, quote.deposit
+    );
+    const result = await safeFetch(`${BASE_URL}/bridge/broadcast`, {
+      method: "POST",
+      body: JSON.stringify({ intent: quote.deposit, signature })
+    });
+    callback({ text: `Bridged! ID: ${result.orderId}` });
+    return true;
+  }
+};</code></pre>
+            </div>
+
+            <!-- Collapsible: API Reference -->
+            <details class="expandable-section">
+                <summary>API Reference — 7 Endpoints</summary>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Endpoint</th>
+                            <th>Method</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>/api/bridge/quote</code></td>
+                            <td>GET</td>
+                            <td>Live solver quote with fee breakdown</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/bridge/chains</code></td>
+                            <td>GET</td>
+                            <td>Supported chains and tokens</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/bridge/limits</code></td>
+                            <td>GET</td>
+                            <td>Route liquidity limits per pair</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/bridge/status/:txHash</code></td>
+                            <td>GET</td>
+                            <td>Track deposit fulfillment</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/bridge/analytics</code></td>
+                            <td>GET</td>
+                            <td>24h bridge usage statistics</td>
+                        </tr>
+                        <tr class="api-row-highlight">
+                            <td><code>/api/bridge/execute</code></td>
+                            <td>POST</td>
+                            <td>Execute bridge via Privy wallet</td>
+                        </tr>
+                        <tr>
+                            <td><code>/api/bridge/supported</code></td>
+                            <td>GET</td>
+                            <td>Full chains × tokens matrix</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <!-- Collapsible: Supported Chains -->
+            <details class="expandable-section">
+                <summary>Supported Chains & Tokens — 7 Networks</summary>
+                <table class="api-table bridge-asset-table">
+                    <thead>
+                        <tr>
+                            <th>Chain</th>
+                            <th>ID</th>
+                            <th>USDC</th>
+                            <th>ETH / WETH</th>
+                            <th>SpokePool</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>🔵 Base</td>
+                            <td>8453</td>
+                            <td><code>0x8335...2913</code></td>
+                            <td><code>0x4200...0006</code></td>
+                            <td><code>0x09ae...EC64</code></td>
+                        </tr>
+                        <tr>
+                            <td>🟣 Ethereum</td>
+                            <td>1</td>
+                            <td><code>0xA0b8...eB48</code></td>
+                            <td><code>0xC02a...6Cc2</code></td>
+                            <td><code>0x5c7B...35C5</code></td>
+                        </tr>
+                        <tr>
+                            <td>🔷 Arbitrum</td>
+                            <td>42161</td>
+                            <td><code>0xaf88...5831</code></td>
+                            <td><code>0x82aF...39B1</code></td>
+                            <td><code>0xe35e...39B1</code></td>
+                        </tr>
+                        <tr>
+                            <td>🔴 Optimism</td>
+                            <td>10</td>
+                            <td><code>0x0b2C...Ff85</code></td>
+                            <td><code>0x4200...0006</code></td>
+                            <td><code>0x6f26...0281</code></td>
+                        </tr>
+                        <tr>
+                            <td>🟪 Polygon</td>
+                            <td>137</td>
+                            <td><code>0x3c49...3359</code></td>
+                            <td>—</td>
+                            <td><code>0x9295...F096</code></td>
+                        </tr>
+                        <tr>
+                            <td>⬜ zkSync</td>
+                            <td>324</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Coming soon</td>
+                        </tr>
+                        <tr>
+                            <td>🟩 Linea</td>
+                            <td>59144</td>
+                            <td>—</td>
+                            <td>—</td>
+                            <td>Coming soon</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <!-- Collapsible: Execute Params -->
+            <details class="expandable-section">
+                <summary>POST /api/bridge/execute — Parameters</summary>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Param</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>agent_id</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Agent wallet (1-5)</td>
+                        </tr>
+                        <tr>
+                            <td><code>from</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Origin chain ID</td>
+                        </tr>
+                        <tr>
+                            <td><code>to</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Destination chain ID</td>
+                        </tr>
+                        <tr>
+                            <td><code>token</code></td>
+                            <td>string</td>
+                            <td>✅</td>
+                            <td>USDC, ETH, or WETH</td>
+                        </tr>
+                        <tr>
+                            <td><code>amount</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Human-readable (1 = $1)</td>
+                        </tr>
+                        <tr>
+                            <td><code>recipient</code></td>
+                            <td>string</td>
+                            <td>—</td>
+                            <td>Destination address (default: sender)</td>
+                        </tr>
+                        <tr>
+                            <td><code>dry_run</code></td>
+                            <td>boolean</td>
+                            <td>—</td>
+                            <td>Preview without executing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </section>
+
+    <!-- ═══ TAB: DEFI (Enso Super-Aggregator) ═══ -->
+    <section id="tab-defi" class="tab-content">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">DeFi Super-Aggregator</h2>
+                <p class="section-subtitle">Powered by <strong>Enso Finance</strong> — 200+ DEXs, 180+ protocols, 15+
+                    chains. One API call.</p>
+            </div>
+
+            <!-- Capability Pills -->
+            <div class="pill-bar">
+                <button class="pill active" data-defi="swap">Swap</button>
+                <button class="pill" data-defi="crosschain">Cross-Chain</button>
+                <button class="pill" data-defi="yield">Yield</button>
+                <button class="pill" data-defi="lst">LST Staking</button>
+                <button class="pill" data-defi="lp">LP Zap</button>
+                <button class="pill" data-defi="bundle">Bundle</button>
+            </div>
+
+            <!-- Two-column: API Reference + Revenue Diagram -->
+            <div class="two-col-layout">
+                <!-- Left: API Reference -->
+                <div class="defi-api-card">
+                    <h3>API Endpoints</h3>
+                    <table class="api-table compact">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Endpoint</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="method-badge post">POST</span></td>
+                                <td><code>/api/defi/swap</code></td>
+                                <td>Aggregated token swap</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-badge post">POST</span></td>
+                                <td><code>/api/defi/cross-chain</code></td>
+                                <td>Swap + bridge atomically</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-badge post">POST</span></td>
+                                <td><code>/api/defi/yield</code></td>
+                                <td>Enter/exit yield positions</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-badge post">POST</span></td>
+                                <td><code>/api/defi/bundle</code></td>
+                                <td>Multi-step DeFi workflow</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-badge get">GET</span></td>
+                                <td><code>/api/defi/balances</code></td>
+                                <td>Portfolio across protocols</td>
+                            </tr>
+                            <tr>
+                                <td><span class="method-badge get">GET</span></td>
+                                <td><code>/api/defi/supported</code></td>
+                                <td>Chains, tokens, capabilities</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="https://docs.enso.build" target="_blank" class="defi-docs-link">Enso Docs →</a>
+                </div>
+
+                <!-- Right: Revenue Flywheel -->
+                <div class="revenue-diagram">
+                    <h3>Revenue Model</h3>
+                    <div class="revenue-flow">
+                        <div class="revenue-node agent-node">
+                            <span class="revenue-icon">🤖</span>
+                            <span class="revenue-label">AI Agent</span>
+                        </div>
+                        <div class="revenue-arrow">
+                            <span class="revenue-arrow-label">x402 fee: $0.01</span>
+                        </div>
+                        <div class="revenue-node api-node">
+                            <span class="revenue-icon">⚡</span>
+                            <span class="revenue-label">YieldCircle API</span>
+                        </div>
+                        <div class="revenue-arrow">
+                            <span class="revenue-arrow-label">route via Enso</span>
+                        </div>
+                        <div class="revenue-node chain-node">
+                            <span class="revenue-icon">⛓️</span>
+                            <span class="revenue-label">On-Chain TX</span>
+                        </div>
+                    </div>
+                    <div class="revenue-treasury">
+                        <div class="treasury-line"></div>
+                        <div class="treasury-badge">
+                            <span>🏦</span>
+                            <span>Treasury receives 1bps (0.01%) of trade volume</span>
+                        </div>
+                        <div class="treasury-addr"><code>0xe713...04F9</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Code Example (pill-switched) -->
+            <h3 class="subsection-title">Quick Start</h3>
+            <div class="bridge-code-tabs">
+                <button class="code-tab active" data-defitab="swap-example">Swap</button>
+                <button class="code-tab" data-defitab="crosschain-example">Cross-Chain</button>
+                <button class="code-tab" data-defitab="eliza-example">Eliza Plugin</button>
+            </div>
+            <div id="defitab-swap-example" class="code-panel active">
+                <pre><code># Swap USDC → ETH on Base (with custom receiver)
+curl -X POST https://api.yieldcircle.app/api/defi/swap \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": 2,
+    "chain_id": 8453,
+    "token_in": "USDC",
+    "token_out": "ETH",
+    "amount": "1000000",
+    "slippage": 50,
+    "receiver": "0xEae03EB54eB26B38057544895E834aF42fc46A69",
+    "dry_run": true
+  }'
+
+# Response:
+# { "preview": { "amount_out": "489300739167370", "receiver": "0xEae0..." } }</code></pre>
+            </div>
+            <div id="defitab-crosschain-example" class="code-panel">
+                <pre><code># Cross-chain: USDC on Base → POL on Polygon (LIVE ✓)
+curl -X POST https://api.yieldcircle.app/api/defi/cross-chain \
+  -H "Content-Type: application/json" \
+  -d '{
+    "agent_id": 2,
+    "from_chain": 8453,
+    "to_chain": 137,
+    "token_in": "USDC",
+    "token_out": "0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "amount": "1000000",
+    "slippage": 100,
+    "recipient": "0xEae03EB54eB26B38057544895E834aF42fc46A69",
+    "dry_run": false
+  }'
+
+# Live TX: basescan.org/tx/0xbe37aa45eb5b31df...
+# Route: Stargate bridge + OpenOcean swap → ~10.32 POL</code></pre>
+            </div>
+            <div id="defitab-eliza-example" class="code-panel">
+                <pre><code>// Eliza Plugin — AI Agent DeFi Swap
+import { Action } from "@elizaos/core";
+
+export const yieldCircleSwap: Action = {
+  name: "YIELDCIRCLE_SWAP",
+  handler: async (runtime, message) => {
+    const res = await fetch("https://api.yieldcircle.app/api/defi/swap", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        agent_id: 2,
+        chain_id: 8453,
+        token_in: "ETH",
+        token_out: "USDC",
+        amount: "1000000000000000",
+        slippage: 50,
+        dry_run: false
+      })
+    });
+    return res.json();
+  }
+};</code></pre>
+            </div>
+
+            <!-- Collapsible: Supported Chains -->
+            <details class="expandable-section">
+                <summary>Supported Chains — 15 Networks</summary>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Chain</th>
+                            <th>ID</th>
+                            <th>Swap</th>
+                            <th>Cross-Chain</th>
+                            <th>Yield</th>
+                            <th>LST</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Ethereum</td>
+                            <td>1</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Base</td>
+                            <td>8453</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Arbitrum</td>
+                            <td>42161</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Optimism</td>
+                            <td>10</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                        </tr>
+                        <tr>
+                            <td>Polygon</td>
+                            <td>137</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>BNB Chain</td>
+                            <td>56</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Avalanche</td>
+                            <td>43114</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>zkSync</td>
+                            <td>324</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Linea</td>
+                            <td>59144</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Scroll</td>
+                            <td>534352</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>Blast</td>
+                            <td>81457</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>✅</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+
+            <!-- Collapsible: Swap Params -->
+            <details class="expandable-section">
+                <summary>POST /api/defi/swap — Parameters</summary>
+                <table class="api-table">
+                    <thead>
+                        <tr>
+                            <th>Param</th>
+                            <th>Type</th>
+                            <th>Required</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>agent_id</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Agent wallet (1-5)</td>
+                        </tr>
+                        <tr>
+                            <td><code>chain_id</code></td>
+                            <td>number</td>
+                            <td>✅</td>
+                            <td>Chain to execute on</td>
+                        </tr>
+                        <tr>
+                            <td><code>token_in</code></td>
+                            <td>string</td>
+                            <td>✅</td>
+                            <td>Symbol or address</td>
+                        </tr>
+                        <tr>
+                            <td><code>token_out</code></td>
+                            <td>string</td>
+                            <td>✅</td>
+                            <td>Symbol or address</td>
+                        </tr>
+                        <tr>
+                            <td><code>amount</code></td>
+                            <td>string</td>
+                            <td>✅</td>
+                            <td>Amount in wei</td>
+                        </tr>
+                        <tr>
+                            <td><code>slippage</code></td>
+                            <td>number</td>
+                            <td>—</td>
+                            <td>Slippage in bps (default: 50 = 0.5%)</td>
+                        </tr>
+                        <tr>
+                            <td><code>receiver</code></td>
+                            <td>string</td>
+                            <td>—</td>
+                            <td>Custom recipient address (default: agent wallet)</td>
+                        </tr>
+                        <tr>
+                            <td><code>dry_run</code></td>
+                            <td>boolean</td>
+                            <td>—</td>
+                            <td>Preview without executing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </details>
+        </div>
+    </section>
+
+    <!-- ═══ TAB: ON-CHAIN DASHBOARD ═══ -->
+    <section id="tab-onchain" class="tab-content">
+        <div class="tab-inner">
+            <h2 class="section-title">On-Chain Dashboard</h2>
+            <p class="section-desc">Live on-chain data from <strong>Base Mainnet</strong>. ERC-8004 agent identity, ERC-8183 agentic commerce, and autonomous treasury — all verifiable on BaseScan.</p>
+
+            <!-- Agent Identity Card -->
+            <div class="oc-identity-card">
+                <div class="oc-identity-header">
+                    <div class="oc-identity-left">
+                        <span class="oc-identity-icon">🌊</span>
+                        <div>
+                            <h3 id="oc-agent-name">NewsRiver Intelligence</h3>
+                            <div class="oc-identity-badges">
+                                <span class="oc-badge oc-badge-erc">ERC-8004 ✓</span>
+                                <span class="oc-badge oc-badge-net">Base Mainnet</span>
+                                <span class="oc-badge oc-badge-live">● LIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248" target="_blank" class="oc-basescan-link">View on BaseScan ↗</a>
+                </div>
+                <div class="oc-identity-details">
+                    <div class="oc-detail-row"><span>Human Operator</span><span>Bidur Shiwakoti (@justcryptodefi)</span></div>
+                    <div class="oc-detail-row"><span>Agent Address</span><span id="oc-agent-addr"><code>0xEae03EB54eB26B38057544895E834aF42fc46A69</code></span></div>
+                    <div class="oc-detail-row"><span>Identity Contract</span><a href="https://basescan.org/token/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432" target="_blank">0x8004a169...a432 ↗</a></div>
+                    <div class="oc-detail-row"><span>Service Endpoint</span><code>https://api.yieldcircle.app</code></div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="oc-stats-grid">
+                <div class="oc-stat-card">
+                    <span class="oc-stat-icon">📝</span>
+                    <div class="oc-stat-value" id="oc-job-count">—</div>
+                    <div class="oc-stat-label">On-Chain Jobs</div>
+                    <div class="oc-stat-source">via ERC-8183 contract</div>
+                </div>
+                <div class="oc-stat-card">
+                    <span class="oc-stat-icon">💰</span>
+                    <div class="oc-stat-value" id="oc-usdc-balance">—</div>
+                    <div class="oc-stat-label">USDC Balance</div>
+                    <div class="oc-stat-source">Base Mainnet</div>
+                </div>
+                <div class="oc-stat-card">
+                    <span class="oc-stat-icon">🤖</span>
+                    <div class="oc-stat-value" id="oc-decisions">—</div>
+                    <div class="oc-stat-label">Autonomous Decisions</div>
+                    <div class="oc-stat-source">via agent brain</div>
+                </div>
+                <div class="oc-stat-card">
+                    <span class="oc-stat-icon">⚡</span>
+                    <div class="oc-stat-value" id="oc-paid-requests">—</div>
+                    <div class="oc-stat-label">Paid Requests</div>
+                    <div class="oc-stat-source">x402 micropayments</div>
+                </div>
+            </div>
+
+            <!-- Treasury Section -->
+            <div class="oc-section">
+                <h3 class="oc-section-title">🏦 Agent Treasury</h3>
+                <div class="oc-treasury-grid">
+                    <div class="oc-treasury-item">
+                        <span class="oc-treasury-label">Wallet Address</span>
+                        <a id="oc-treasury-addr" href="https://basescan.org/address/0xEae03EB54eB26B38057544895E834aF42fc46A69" target="_blank" class="oc-treasury-value oc-mono">0xEae0...6A69</a>
+                    </div>
+                    <div class="oc-treasury-item">
+                        <span class="oc-treasury-label">USDC Balance</span>
+                        <span id="oc-treasury-balance" class="oc-treasury-value oc-green">Loading...</span>
+                    </div>
+                    <div class="oc-treasury-item">
+                        <span class="oc-treasury-label">Total Revenue</span>
+                        <span id="oc-treasury-revenue" class="oc-treasury-value">—</span>
+                    </div>
+                    <div class="oc-treasury-item">
+                        <span class="oc-treasury-label">Network</span>
+                        <span class="oc-treasury-value">🔵 Base Mainnet</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Jobs -->
+            <div class="oc-section">
+                <h3 class="oc-section-title">📋 Live Jobs (ERC-8183)</h3>
+                <div id="oc-jobs-list" class="oc-jobs-list">
+                    <div class="oc-loading">Loading on-chain jobs...</div>
+                </div>
+                <button class="btn-primary" onclick="loadOnChainData()" style="margin-top:1rem;">🔄 Refresh</button>
+            </div>
+
+            <!-- Activity Feed -->
+            <div class="oc-section">
+                <h3 class="oc-section-title">📡 Platform Activity</h3>
+                <div id="oc-activity-feed" class="oc-activity-feed">
+                    <div class="oc-loading">Loading activity...</div>
+                </div>
+            </div>
+
+            <!-- Contract Details -->
+            <div class="oc-section">
+                <h3 class="oc-section-title">📜 Contract Details</h3>
+                <div class="oc-contract-grid">
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">ERC-8183 Contract</span>
+                        <a href="https://basescan.org/address/0xf24225e6bcd8805c3664b3ffe84da8ba610dfca2#code" target="_blank" class="oc-contract-value oc-mono">0xf242...fca2 ↗</a>
+                    </div>
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">ERC-8004 Registry</span>
+                        <a href="https://basescan.org/token/0x8004a169fb4a3325136eb29fa0ceb6d2e539a432" target="_blank" class="oc-contract-value oc-mono">0x8004...a432 ↗</a>
+                    </div>
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">USDC Token</span>
+                        <a href="https://basescan.org/token/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913" target="_blank" class="oc-contract-value oc-mono">0x8335...2913 ↗</a>
+                    </div>
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">Network</span>
+                        <span class="oc-contract-value">🔵 Base (Chain ID: 8453)</span>
+                    </div>
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">Platform Fee</span>
+                        <span class="oc-contract-value">0.25%</span>
+                    </div>
+                    <div class="oc-contract-item">
+                        <span class="oc-contract-label">Payment Token</span>
+                        <span class="oc-contract-value">USDC (6 decimals)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TAB: VISION ═══ -->
+    <section id="tab-vision" class="tab-content">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Vision & Roadmap</h2>
+                <p class="section-subtitle">Four pillars for a fully trustless, verifiable autonomous AI economy</p>
+            </div>
+
+            <div class="vision-grid">
+                <div class="vision-card">
+                    <div class="vision-status done">IMPLEMENTED</div>
+                    <h3>TEE-Signed Execution</h3>
+                    <p>Agent transactions are signed inside <strong>Privy Trusted Execution Environments</strong>.
+                        Private keys never leave the enclave. Every on-chain action is cryptographically attestable —
+                        the smart contract can verify the exact code that authorized the spend.</p>
+                    <div class="vision-tech">Privy Server Wallets · TEE Attestation · ERC-8183</div>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-status done">IMPLEMENTED</div>
+                    <h3>Trustless Cross-Chain Bridge</h3>
+                    <p>AI agents bridge assets across 7 chains via <strong>Across Protocol's ERC-7683 intent
+                            system</strong>. Zero custody, gasless signing, competitive solver execution. Dual revenue:
+                        x402 API access fee + 5bps on-chain platform fee.</p>
+                    <div class="vision-tech">Across Protocol · ERC-7683 · EIP-712 · Solver Network</div>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-status done">IMPLEMENTED</div>
+                    <h3>DeFi Super-Aggregator (Enso)</h3>
+                    <p>AI agents access <strong>200+ DEXs and 180+ protocols across 15+ chains</strong> through a single
+                        API call. Swaps, bridges, yield entry/exit, LST staking, LP zaps, portfolio rebalancing — all
+                        powered by Enso Finance. Dual revenue: x402 micropayment + 1bps on-chain volume fee.</p>
+                    <div class="vision-tech">Enso Finance · 200+ DEXs · 15 Chains · 1bps Volume Fee</div>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-status planned">NEXT</div>
+                    <h3>Yield-Funded Agent Allowances</h3>
+                    <p>With yield entry/exit now live via Enso, the next step: sponsors deposit USDC into
+                        <strong>yield-bearing protocols</strong> (Aave, Morpho). Principal stays safe — only yield flows
+                        to the agent. Spending is bounded by yield rate. Autonomous forever, trustlessly.
+                    </p>
+                    <div class="vision-tech">Aave · Morpho · ERC-4626 · Enso Yield API · AgenticCommerce.sol</div>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-status planned">NEXT</div>
+                    <h3>Cryptographic Data Provenance</h3>
+                    <p>Every article ingested and every sentiment score computed gets <strong>merkle-hashed and
+                            published</strong> to a data availability layer. When the AI acts on data, the on-chain
+                        contract can verify the exact data that drove the decision — eliminating man-in-the-middle
+                        attacks on AI context.</p>
+                    <div class="vision-tech">Merkle Trees · EigenDA / Celestia · Base Calldata</div>
+                </div>
+
+                <div class="vision-card">
+                    <div class="vision-status planned">FUTURE</div>
+                    <h3>N-of-M AI Multisig</h3>
+                    <p>For high-risk actions, replace human approval with a <strong>secondary Risk Management
+                            AI</strong> running on a different LLM. Both AIs must independently agree before the smart
+                        contract executes. Disagreement triggers human veto — trustless safety without human
+                        bottlenecks.</p>
+                    <div class="vision-tech">Gemini + Claude · Multi-LLM Consensus · Programmatic Multisig</div>
                 </div>
             </div>
         </div>
@@ -637,11 +2202,11 @@
                     target="_blank">agent.yieldcircle.app</a>
             </div>
             <div class="footer-links">
-                <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank">🐾 ClawHub</a>
-                <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank">📦 npm</a>
-                <a href="https://discord.gg/EXFY53gbaH" target="_blank">💬 Discord</a>
+                <a href="https://clawhub.ai/BidurS/newsriver-intelligence" target="_blank">ClawHub</a>
+                <a href="https://www.npmjs.com/package/@newsriver/eliza-plugin" target="_blank">npm</a>
+                <a href="https://discord.gg/EXFY53gbaH" target="_blank">Discord</a>
                 <a href="https://basescan.org/tx/0x6ea9aa3d963a805becab2453b590e7eaf4908a263c840641978827ce02d2c248"
-                    target="_blank">🔵 BaseScan</a>
+                    target="_blank">BaseScan</a>
             </div>
             <div class="footer-copy">Built for The Synthesis · © 2026 YieldCircle</div>
         </div>
