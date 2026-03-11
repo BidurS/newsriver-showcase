@@ -628,6 +628,24 @@ window.loadAnalytics = async function () {
             }
         }
 
+        // ── Ampersend Partner Badge ──
+        const analyticsTab = document.getElementById('tab-analytics');
+        if (analyticsTab && !document.getElementById('ampersend-badge')) {
+            const badge = document.createElement('div');
+            badge.id = 'ampersend-badge';
+            badge.innerHTML = `
+                <div style="margin:2rem auto 0;max-width:600px;padding:1rem 1.5rem;background:linear-gradient(135deg,rgba(99,102,241,0.08),rgba(168,85,247,0.08));border:1px solid rgba(139,92,246,0.2);border-radius:12px;display:flex;align-items:center;gap:1rem;">
+                    <div style="font-size:1.5rem;">⚡</div>
+                    <div style="flex:1;">
+                        <div style="font-weight:600;color:#a78bfa;font-size:0.85rem;letter-spacing:0.5px;text-transform:uppercase;">Payment Observability</div>
+                        <div style="color:rgba(255,255,255,0.7);font-size:0.8rem;margin-top:2px;">Buy/sell volume tracked via <a href="https://www.ampersend.ai/" target="_blank" style="color:#a78bfa;text-decoration:none;font-weight:600;">Ampersend</a> — x402 payment management by Edge & Node</div>
+                    </div>
+                    <a href="https://docs.ampersend.ai/" target="_blank" style="padding:0.4rem 0.8rem;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.3);border-radius:8px;color:#c4b5fd;font-size:0.75rem;text-decoration:none;white-space:nowrap;transition:all 0.2s;" onmouseover="this.style.background='rgba(139,92,246,0.3)'" onmouseout="this.style.background='rgba(139,92,246,0.15)'">View Docs →</a>
+                </div>
+            `;
+            analyticsTab.appendChild(badge);
+        }
+
         analyticsLoaded = true;
 
     } catch (err) {
