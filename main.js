@@ -135,7 +135,7 @@ window.askRiver = async function () {
 
     try {
         const ctrl = new AbortController();
-        const timeoutId = setTimeout(() => ctrl.abort(), 8000);
+        const timeoutId = setTimeout(() => ctrl.abort(), 15000);
         const res = await fetch(`${API_BASE}/api/v1/askriver`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'X-Dry-Run': 'true' },
@@ -158,7 +158,7 @@ window.askRiver = async function () {
         document.getElementById('proof-time').textContent = new Date().toISOString();
         proofEl.classList.remove('hidden');
     } catch (err) {
-        answerEl.innerHTML = `<div style="color:var(--red);display:flex;align-items:center;gap:8px;"><span style="font-size:1.3rem;">⚠️</span> <span>${err.name === 'AbortError' ? 'Request timed out. The API server may be cold-starting — try again.' : 'Failed to fetch. The API might be rate-limited or unavailable. Try again in a moment.'}</span></div>`;
+        answerEl.innerHTML = `<div style="color:var(--red);display:flex;align-items:center;gap:8px;"><span style="font-size:1.3rem;">⚠️</span> <span>${err.name === 'AbortError' ? 'Request timed out — the API may be cold-starting. Click Ask again to retry.' : 'Connection issue — click Ask again to retry.'}</span></div>`;
     }
 
     btn.disabled = false;
@@ -235,12 +235,32 @@ window.executeEndpoint = async function () {
 window.copyCurl = function () {
     const key = document.getElementById('endpoint-select').value;
     const cmd = getCurlCommand(key).replace('$ ', '');
-    navigator.clipboard.writeText(cmd).then(() => {
-        const btn = document.querySelector('[onclick="copyCurl()"]');
-        btn.textContent = '✅ Copied!';
-        setTimeout(() => btn.textContent = '📋 Copy curl', 1500);
-    });
+    const btn = document.querySelector('[onclick="copyCurl()"]');
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(cmd).then(() => {
+                btn.textContent = '✅ Copied!';
+                setTimeout(() => btn.textContent = '📋 Copy curl', 1500);
+            }).catch(() => fallbackCopy(cmd, btn));
+        } else {
+            fallbackCopy(cmd, btn);
+        }
+    } catch (e) {
+        fallbackCopy(cmd, btn);
+    }
 };
+
+function fallbackCopy(text, btn) {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;left:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy curl', 1500);
+}
 
 // ══════════════════════════════════════
 // ERC-8183 JOBS TAB
@@ -312,7 +332,34 @@ window.loadJobs = async function () {
                 </div>
             `).join('');
         } else {
-            html += `<div class="jobs-empty">${isDeployed ? 'No jobs yet — be the first to create one!' : 'Contract deployment pending.'}</div>`;
+            // Show recent agent decisions as activity when no on-chain jobs yet
+            try {
+                const decRes = await fetch(`${API_BASE}/api/jobs/treasury`);
+                const decData = await decRes.json();
+                const decisions = decData?.autonomy?.recent_decisions || [];
+                if (decisions.length > 0) {
+                    html += `<div class="pipeline-section"><h3 class="pipeline-title">🤖 Recent Agent Autonomous Activity</h3></div>`;
+                    html += decisions.slice(0, 5).map(d => {
+                        const icon = d.decision_type === 'job_creation' ? '🎯'
+                            : d.decision_type === 'budget_allocation' ? '💰'
+                            : d.decision_type === 'heartbeat' ? '💤' : '🤖';
+                        return `
+                            <div class="job-card">
+                                <div class="job-card-left">
+                                    <h4>${icon} ${(d.decision_type || '').replace(/_/g, ' ')}</h4>
+                                    <p>${d.reasoning || 'Autonomous decision'}${d.amount_allocated > 0 ? ` · Allocated $${d.amount_allocated.toFixed(2)} USDC` : ''}</p>
+                                    <p style="font-size:0.75rem;opacity:0.5;">${d.created_at ? timeAgo(d.created_at) : ''}</p>
+                                </div>
+                                <span class="job-status-badge job-status-${d.status === 'executed' ? 'completed' : 'open'}">${d.status || 'logged'}</span>
+                            </div>`;
+                    }).join('');
+                    html += `<div style="text-align:center;padding:12px;opacity:0.4;font-size:0.8rem;">Agent creates on-chain jobs when trending topics + sufficient USDC balance detected</div>`;
+                } else {
+                    html += `<div class="jobs-empty">${isDeployed ? 'No jobs yet — agent creates them autonomously on next cron cycle.' : 'Contract deployment pending.'}</div>`;
+                }
+            } catch {
+                html += `<div class="jobs-empty">${isDeployed ? 'No jobs yet — agent creates them autonomously on next cron cycle.' : 'Contract deployment pending.'}</div>`;
+            }
         }
 
         listEl.innerHTML = html;
@@ -860,7 +907,7 @@ window.fetchBridgeQuote = async function () {
 
     try {
         const ctrl = new AbortController();
-        const timeoutId = setTimeout(() => ctrl.abort(), 10000);
+        const timeoutId = setTimeout(() => ctrl.abort(), 15000);
         const res = await fetch(
             `${API_BASE}/api/bridge/quote?from=${from}&to=${to}&token=${token}&amount=${amount}`,
             { signal: ctrl.signal }
@@ -914,7 +961,7 @@ window.fetchBridgeQuote = async function () {
                 ✅ Live data from Across Protocol solver network · ${new Date().toLocaleTimeString()}
             </div>`;
     } catch (err) {
-        result.innerHTML = `<div style="color:#f87171;text-align:center;">⚠️ ${err.name === 'AbortError' ? 'Request timed out — the bridge solver may be busy. Try again.' : 'Network error: ' + err.message}</div>`;
+        result.innerHTML = `<div style="color:#f87171;text-align:center;">⚠️ ${err.name === 'AbortError' ? 'Request timed out — the bridge solver may be busy. Click "Get Live Quote" to retry.' : 'Connection issue — click "Get Live Quote" to retry.'}</div>`;
     } finally {
         btn.disabled = false;
         btn.textContent = 'Get Live Quote →';
