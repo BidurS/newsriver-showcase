@@ -72,6 +72,16 @@ The Synthesis judges specifically ask for documentation of the building process.
   - `agent.yieldcircle.app` showed blank screen — root caused to viem (2.4MB) being eagerly imported, fixed by extracting utils
   - Analytics showed $0.00 — found admin auth blocking public endpoints, added `/api/analytics/public`
 
+### Phase 12: Real x402 Payments on Base Mainnet (Mar 2026)
+- **Human**: "Let's make real on-chain payments, not just simulations"
+- **Agent**: Debugged Privy server wallet signing, discovered x402 facilitator only supports testnets, pivoted to direct USDC transfers via EIP-3009 `TransferWithAuthorization`
+- **Key Pivots**:
+  - x402 facilitator rejected Base mainnet → switched to direct `signAndSendTransaction` via Privy
+  - Privy API returned 500 → fixed by removing redundant `chain_id` and `value` from TX params
+  - D1 `usage_logs` schema mismatch → corrected column names for proper analytics tracking
+- **Result**: 4 verified on-chain USDC transactions on Base mainnet, visible on [Basescan](https://basescan.org/address/0xe713fDE259695e105286276135042482811604F9#tokentxns)
+- **Wallets involved**: Agent #1, Agent #2, Treasury — real agent-to-agent commerce
+
 ---
 
 ## Notable Human-Agent Collaboration Moments
