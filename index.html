@@ -7,12 +7,44 @@
     <title>NewsRiver Intelligence — The Synthesis Showcase</title>
     <meta name="description"
         content="Autonomous AI agent with x402 micropayments, ERC-8004 on-chain identity, and real intelligence capabilities. Built for The Synthesis hackathon." />
+
+    <!-- ═══ OpenGraph Meta Tags ═══ -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://showcase.yieldcircle.app/" />
+    <meta property="og:title" content="NewsRiver Intelligence — Autonomous AI Agent Showcase" />
+    <meta property="og:description" content="291,000+ articles. 11 autonomous agent archetypes. Real-time sentiment scoring. x402 USDC micropayments on Base. ERC-8004 on-chain identity. Built for The Synthesis hackathon." />
+    <meta property="og:image" content="https://showcase.yieldcircle.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- ═══ Twitter Card Meta Tags ═══ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NewsRiver Intelligence — Autonomous AI Agent Showcase" />
+    <meta name="twitter:description" content="291,000+ articles. 11 autonomous agents. Real-time intelligence with x402 micropayments on Base. Built for The Synthesis." />
+    <meta name="twitter:image" content="https://showcase.yieldcircle.app/og-image.png" />
+
+    <!-- ═══ PWA & Mobile ═══ -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#00d4ff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="NewsRiver" />
+
     <link rel="icon" type="image/svg+xml"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌊</text></svg>" />
     <link
         href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="/style.css" />
+
+    <!-- ═══ Service Worker Registration ═══ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {});
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -392,6 +424,37 @@
 
             <!-- Agent Autonomous Brain Activity -->
             <div id="agent-activity"></div>
+
+            <!-- ═══ Agent-to-Agent Commerce Network ═══ -->
+            <div class="agent-commerce-section">
+                <h3>🔄 Agent Commerce Network <span class="commerce-badge">LIVE ON-CHAIN</span></h3>
+                <p class="commerce-desc">Real USDC payments between autonomous agents on Base mainnet. Every transaction is verifiable on Basescan.</p>
+
+                <!-- Stats Dashboard -->
+                <div class="commerce-stats" id="commerce-stats">
+                    <div class="commerce-stat">
+                        <span class="commerce-stat-value" id="ac-total-jobs">—</span>
+                        <span class="commerce-stat-label">Jobs Completed</span>
+                    </div>
+                    <div class="commerce-stat">
+                        <span class="commerce-stat-value" id="ac-total-usdc">—</span>
+                        <span class="commerce-stat-label">USDC Transferred</span>
+                    </div>
+                    <div class="commerce-stat">
+                        <span class="commerce-stat-value" id="ac-total-agents">—</span>
+                        <span class="commerce-stat-label">Active Agents</span>
+                    </div>
+                    <div class="commerce-stat">
+                        <span class="commerce-stat-value" id="ac-total-cycles">—</span>
+                        <span class="commerce-stat-label">Rotation Cycles</span>
+                    </div>
+                </div>
+
+                <!-- Live Feed -->
+                <div class="commerce-feed" id="commerce-feed">
+                    <div class="commerce-loading">Loading agent commerce data...</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2193,6 +2256,14 @@ export const yieldCircleSwap: Action = {
             </div>
         </div>
     </section>
+
+    <!-- ═══ Agent Simulation Panel ═══ -->
+    <div class="simulation-panel">
+        <button class="simulate-btn" onclick="triggerSimulation()">
+            <span class="simulate-icon">⚡</span>
+            <span>Simulate Agent Activity</span>
+        </button>
+    </div>
 
     <!-- ═══ Footer ═══ -->
     <footer class="showcase-footer">

@@ -102,6 +102,14 @@ const DEMO = {
         { type: 'query', description: 'AskRiver: "What is trending in crypto?"', created_at: new Date(Date.now() - 1800000).toISOString().replace('Z', '') },
         { type: 'job_created', description: 'Job #2: Stablecoin flow monitoring', created_at: new Date(Date.now() - 2400000).toISOString().replace('Z', '') },
     ]},
+    agentJobs: {
+        stats: { total_jobs: 12, total_usdc: '0.012000', unique_agents: 5, total_cycles: 4 },
+        history: [
+            { id: 1, client_name: 'NewsRiver Intelligence', client_wallet: '0xEae03EB54eB26B38057544895E834aF42fc46A69', provider_name: 'Market Sentinel', provider_wallet: '0x7890...def0', job_description: 'Real-time crypto news feed aggregation from 277 RSS sources', api_endpoint: '/api/v1/articles?limit=5', payment_usdc: '0.001000', status: 'completed', tx_hash: '0x4d721da4', created_at: new Date(Date.now() - 600000).toISOString() },
+            { id: 2, client_name: 'Market Sentinel', client_wallet: '0x7890...def0', provider_name: 'NewsRiver Intelligence', provider_wallet: '0xEae03EB54eB26B38057544895E834aF42fc46A69', job_description: 'Semantic search across 291K articles for BTC ETF analysis', api_endpoint: '/api/v1/search/semantic?q=bitcoin+etf', payment_usdc: '0.001000', status: 'completed', tx_hash: '0xf7d8877a', created_at: new Date(Date.now() - 1200000).toISOString() },
+            { id: 3, client_name: 'Trend Analyzer', client_wallet: '0xabcd...1234', provider_name: 'NewsRiver Intelligence', provider_wallet: '0xEae03EB54eB26B38057544895E834aF42fc46A69', job_description: 'Hourly intelligence brief on global crypto markets', api_endpoint: '/api/v1/intelligence/hourly', payment_usdc: '0.001000', status: 'completed', tx_hash: '0x957dad45', created_at: new Date(Date.now() - 1800000).toISOString() },
+        ],
+    },
 };
 
 // ── Services for Bazaar ──
@@ -568,13 +576,15 @@ window.loadJobs = async function () {
 
         listEl.innerHTML = html;
 
-        // ── Agent Activity (autonomous brain) ──
+        // ── Agent Activity (autonomous brain) + Commerce ──
         loadAgentActivity();
+        loadAgentCommerce();
 
     } catch (err) {
         // Ultimate fallback — render demo jobs so visitors never see errors
         renderDemoJobs(listEl, countEl, statusEl);
         loadAgentActivity();
+        loadAgentCommerce();
     }
 };
 
@@ -667,6 +677,82 @@ async function loadAgentActivity() {
             </div>
         </div>
     `;
+}
+
+// ══════════════════════════════════════
+// AGENT COMMERCE NETWORK — A2A Jobs
+// ══════════════════════════════════════
+async function loadAgentCommerce() {
+    const statsEl = document.getElementById('commerce-stats');
+    const feedEl = document.getElementById('commerce-feed');
+    if (!feedEl) return;
+
+    try {
+        // Fetch stats and history in parallel
+        const [statsData, historyData] = await Promise.all([
+            safeFetch(`${API_BASE}/api/agent-jobs/stats`),
+            safeFetch(`${API_BASE}/api/agent-jobs/history?limit=20`),
+        ]);
+
+        const stats = statsData || DEMO.agentJobs.stats;
+        const history = (historyData?.history) || DEMO.agentJobs.history;
+
+        // ── Render Stats ──
+        const totalJobsEl = document.getElementById('ac-total-jobs');
+        const totalUsdcEl = document.getElementById('ac-total-usdc');
+        const totalAgentsEl = document.getElementById('ac-total-agents');
+        const totalCyclesEl = document.getElementById('ac-total-cycles');
+        if (totalJobsEl) totalJobsEl.textContent = stats.total_jobs || 0;
+        if (totalUsdcEl) totalUsdcEl.textContent = '$' + parseFloat(stats.total_usdc || 0).toFixed(4);
+        if (totalAgentsEl) totalAgentsEl.textContent = stats.unique_agents || 0;
+        if (totalCyclesEl) totalCyclesEl.textContent = stats.total_cycles || 0;
+
+        // ── Render Feed ──
+        if (!history || history.length === 0) {
+            feedEl.innerHTML = '<div class="commerce-loading">No agent commerce activity yet — trigger a cycle to start.</div>';
+            return;
+        }
+
+        feedEl.innerHTML = history.map((job, i) => {
+            const shortClient = (job.client_wallet || '').slice(0, 6) + '...' + (job.client_wallet || '').slice(-4);
+            const shortProvider = (job.provider_wallet || '').slice(0, 6) + '...' + (job.provider_wallet || '').slice(-4);
+            const statusCls = job.status === 'completed' ? 'commerce-status-completed' : 'commerce-status-failed';
+            const txLink = job.tx_hash ? `<a href="https://basescan.org/tx/${job.tx_hash}" target="_blank" rel="noopener">📋 View TX</a>` : '<span>No TX</span>';
+            const ago = timeAgo(job.created_at);
+
+            return `
+                <div class="commerce-card" style="animation-delay: ${i * 0.05}s">
+                    <div class="commerce-card-agents">
+                        <span class="commerce-agent"><span class="commerce-agent-icon">🤖</span> ${job.client_name || shortClient}</span>
+                        <span class="commerce-flow-arrow">→</span>
+                        <span class="commerce-amount">$${parseFloat(job.payment_usdc || 0).toFixed(4)}</span>
+                        <span class="commerce-flow-arrow">→</span>
+                        <span class="commerce-agent"><span class="commerce-agent-icon">⚡</span> ${job.provider_name || shortProvider}</span>
+                    </div>
+                    <div class="commerce-card-job">${job.job_description || 'Agent-to-agent job'}</div>
+                    <div class="commerce-card-meta">
+                        <span class="${statusCls}">● ${job.status}</span>
+                        <span class="commerce-endpoint">${job.api_endpoint || '—'}</span>
+                        ${txLink}
+                        <span>${ago}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+    } catch (err) {
+        // Fallback to demo data
+        const demo = DEMO.agentJobs;
+        const totalJobsEl = document.getElementById('ac-total-jobs');
+        const totalUsdcEl = document.getElementById('ac-total-usdc');
+        const totalAgentsEl = document.getElementById('ac-total-agents');
+        const totalCyclesEl = document.getElementById('ac-total-cycles');
+        if (totalJobsEl) totalJobsEl.textContent = demo.stats.total_jobs;
+        if (totalUsdcEl) totalUsdcEl.textContent = '$' + parseFloat(demo.stats.total_usdc).toFixed(4);
+        if (totalAgentsEl) totalAgentsEl.textContent = demo.stats.unique_agents;
+        if (totalCyclesEl) totalCyclesEl.textContent = demo.stats.total_cycles;
+        feedEl.innerHTML = '<div class="commerce-loading">Agent commerce network initializing...</div>';
+    }
 }
 
 // ── Demo Jobs Renderer (ultimate fallback) ──

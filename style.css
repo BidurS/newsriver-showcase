@@ -185,6 +185,21 @@ body {
     display: block;
 }
 
+.tab-enter {
+    animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .tab-inner {
     max-width: 1100px;
     margin: 0 auto;
@@ -376,6 +391,7 @@ body {
 .badge-live {
     border-color: rgba(16, 185, 129, 0.4);
     color: var(--green);
+    animation: pulse-badge 2s infinite;
 }
 
 @keyframes pulse-badge {
@@ -5796,6 +5812,270 @@ body {
 
 @media (max-width: 480px) {
     .oc-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ══════ SIMULATION PANEL ══════ */
+.simulation-panel {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 99;
+}
+
+.simulate-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    padding: 12px 20px;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-lg);
+    font-family: var(--font);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.simulate-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 20px -8px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent);
+}
+
+.simulate-btn:disabled {
+    opacity: 0.8;
+    cursor: wait;
+    transform: none;
+    box-shadow: var(--shadow-sm);
+}
+
+.simulate-icon {
+    font-size: 16px;
+    color: var(--accent);
+}
+
+.simulate-btn:active {
+    transform: translateY(0);
+}
+
+/* ══════ AGENT COMMERCE NETWORK ══════ */
+
+.agent-commerce-section {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+}
+
+.agent-commerce-section h3 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 4px;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.commerce-badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    background: var(--green-bg);
+    color: var(--green);
+    letter-spacing: 0.5px;
+    animation: oc-pulse 2s ease-in-out infinite;
+}
+
+.commerce-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.commerce-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.commerce-stat {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.commerce-stat:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.commerce-stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+}
+
+.commerce-stat-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.commerce-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.commerce-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s;
+    animation: commerce-slide-in 0.4s ease-out both;
+}
+
+.commerce-card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
+}
+
+@keyframes commerce-slide-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.commerce-card-agents {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.commerce-agent {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.commerce-agent-icon {
+    font-size: 14px;
+}
+
+.commerce-flow-arrow {
+    font-size: 18px;
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.commerce-amount {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--green);
+    background: var(--green-bg);
+    padding: 2px 8px;
+    border-radius: var(--radius-pill);
+}
+
+.commerce-card-job {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.commerce-card-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.commerce-card-meta a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.commerce-card-meta a:hover {
+    text-decoration: underline;
+}
+
+.commerce-endpoint {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    color: var(--text-dim);
+}
+
+.commerce-status-completed {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.commerce-status-failed {
+    color: var(--red, #f87171);
+    font-weight: 700;
+}
+
+.commerce-loading {
+    text-align: center;
+    padding: 28px;
+    color: var(--text-muted);
+    font-size: 14px;
+    background: var(--bg-card);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    animation: oc-pulse 1.5s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .commerce-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .commerce-card-agents {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .commerce-stats {
         grid-template-columns: 1fr;
     }
 }

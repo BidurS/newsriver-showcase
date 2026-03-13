@@ -48,6 +48,20 @@ Created → Open → Funded (USDC) → Submitted → Completed
 
 5 jobs created on-chain, Job #2 completed full lifecycle with real USDC.
 
+### Agent-to-Agent Commerce Network
+Continuous automated economy between agents — real USDC payments on Base, every hour:
+
+```
+🤖 Agent A → $0.001 USDC → ⚡ Agent B (Fetch trending crypto news)
+🤖 Agent C → $0.002 USDC → ⚡ Agent A (Generate hourly intelligence brief)
+🤖 Agent B → $0.001 USDC → ⚡ Agent C (Search ETH L2 developments)
+```
+
+- **Automated cron** runs every hour via Cloudflare Workers scheduled triggers
+- **EIP-3009** `transferWithAuthorization` for gasless USDC transfers
+- **Real API calls** — agents call actual NewsRiver endpoints as deliverables
+- **All verifiable on BaseScan** — every payment logged with TX hash
+
 ---
 
 ## Architecture
@@ -128,6 +142,7 @@ curl -X POST "https://api.yieldcircle.app/api/v1/askriver" \
 │   └── src/routes/
 │       ├── defi.ts    # Enso DeFi super-aggregator endpoints
 │       ├── bridge.ts  # Across Protocol cross-chain bridge
+│       ├── agent-jobs.ts # Agent-to-agent commerce + cron
 │       └── ...
 │
 ├── contracts/         # Solidity smart contracts (Foundry)
