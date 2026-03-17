@@ -8,6 +8,14 @@
 
 ---
 
+## Screenshots
+
+| Landing Page | On-Chain Dashboard | AskRiver AI |
+|---|---|---|
+| ![Landing](docs/screenshot-landing.png) | ![On-Chain](docs/screenshot-onchain.png) | ![AskRiver](docs/screenshot-askriver.png) |
+
+---
+
 ## What is NewsRiver?
 
 NewsRiver is an autonomous AI agent that combines **quantitative intelligence** (288K+ articles, 277 RSS sources, 137 countries) with **DeFi execution** (200+ DEXs, 15+ chains via Enso Finance), **cross-chain bridging** (Across Protocol), and **TEE-secured wallets** (Privy) — all available via **x402 HTTP-native micropayments** on Base.
@@ -64,18 +72,54 @@ Continuous automated economy between agents — real USDC payments on Base, ever
 
 ---
 
-## Architecture
+## Architecture — Agent Commerce Flow
 
 ```
+ ┌──────────┐   Scope      ┌──────────────────────────────┐
+ │  Human   │──────────────▶│  Privy TEE Agent Wallet      │
+ └──────────┘   (budget,    │  Keys never leave enclave    │
+                rules)     └──────────┬───────────────────┘
+                                      │
+                           ┌──────────▼───────────────────┐
+                           │  Cloudflare Workers Cron     │
+                           │  (runs every hour)           │
+                           │  worker/src/cron/            │
+                           │  agent-orchestrator.ts       │
+                           └──────────┬───────────────────┘
+                                      │
+                    ┌─────────────────┼─────────────────┐
+                    │                 │                 │
+              ┌─────▼─────┐   ┌──────▼──────┐   ┌─────▼─────┐
+              │  Agent A   │   │  Agent B    │   │  Agent C   │
+              │  (Buyer)   │   │  (Provider) │   │  (Buyer)   │
+              └─────┬─────┘   └──────┬──────┘   └─────┬─────┘
+                    │                │                 │
+                    └────────────────┼─────────────────┘
+                                     │
+                          ┌──────────▼──────────┐
+                          │  EIP-3009 USDC      │
+                          │  transferWith-      │
+                          │  Authorization      │
+                          │  (Base Mainnet)     │
+                          └──────────┬──────────┘
+                                     │
+                          ┌──────────▼──────────┐
+                          │  ERC-8183 Vault     │
+                          │  Job Escrow +       │
+                          │  Settlement         │
+                          │  (AgenticCommerce)  │
+                          └─────────────────────┘
+```
+
+### Full System Stack
+```
 ┌─────────────────────────────────────────────────────────────────┐
-│                   AI Agent (Eliza / Custom)                     │
-├─────────────────────────────────────────────────────────────────┤
-│                  api.yieldcircle.app (Hono)                     │
+│                   api.yieldcircle.app (Hono)                    │
 ├───────────┬───────────┬───────────┬───────────┬─────────────────┤
-│ Intelligence │  DeFi   │  Bridge   │  Proxy    │  x402 / Auth  │
-│ AskRiver     │  Enso   │  Across   │  Email    │  Micropayments│
-│ Correlation  │  Swap   │  7+ chains│  SMS      │  API Keys     │
-│ Memories     │  Yield  │  Sub-min  │  Scrape   │  D1 Audit     │
+│ Intelligence │  DeFi   │  Bridge   │  Agent    │  x402 / Auth  │
+│ AskRiver     │  Enso   │  Across   │  Commerce │  Micropayments│
+│ Correlation  │  Swap   │  7+ chains│  Cron     │  API Keys     │
+│ Memories     │  Yield  │  Sub-min  │  ERC-8183 │  D1 Audit     │
 ├───────────┴───────────┴───────────┴───────────┴─────────────────┤
 │            Privy TEE Wallets (Server-Side Signing)              │
 ├─────────────────────────────────────────────────────────────────┤
@@ -131,26 +175,36 @@ curl -X POST "https://api.yieldcircle.app/api/v1/askriver" \
 ## Repository Structure
 
 ```
-├── showcase/          # Interactive demo app (Vite + Three.js)
-│   ├── index.html     # Multi-tab showcase with 3D visualization
-│   ├── main.js        # Tab logic, AskRiver demo, terminal, jobs
-│   ├── style.css      # Swiss-style design system (mobile responsive)
-│   ├── worker.js      # Cloudflare Worker static asset server
-│   └── wrangler.toml  # Deployment configuration
+├── contracts/                    # Solidity smart contracts (Foundry)
+│   ├── src/AgenticCommerce.sol   # ERC-8183 on-chain job vault
+│   ├── script/Deploy.s.sol      # Deployment to Base mainnet
+│   └── test/AgenticCommerce.t.sol
 │
-├── worker/            # API Worker (Hono on Cloudflare)
-│   └── src/routes/
-│       ├── defi.ts    # Enso DeFi super-aggregator endpoints
-│       ├── bridge.ts  # Across Protocol cross-chain bridge
-│       ├── agent-jobs.ts # Agent-to-agent commerce + cron
-│       └── ...
+├── worker/src/                   # Cloudflare Worker source (Hono)
+│   ├── cron/                    # ⏰ Autonomous scheduled tasks
+│   │   ├── agent-orchestrator.ts # Hourly agent-to-agent job matching
+│   │   ├── autonomous-loop.ts   # Self-directed intelligence loop
+│   │   ├── activity-feed.ts     # Agent activity event stream
+│   │   └── health-check.ts      # System health + alerting
+│   ├── routes/                  # API endpoints
+│   │   ├── agent-jobs.ts        # Agent commerce lifecycle
+│   │   ├── agents.ts            # Agent CRUD + provisioning
+│   │   └── jobs.ts              # ERC-8183 job management
+│   ├── services/                # Core business logic
+│   │   ├── agent-factory.ts     # Agent decision engine
+│   │   ├── privy-wallet.ts      # TEE wallet operations
+│   │   ├── privy.ts             # Privy API integration
+│   │   ├── budget-guard.ts      # Spending scope enforcement
+│   │   └── dex-executor.ts      # DEX trade execution
+│   └── queue/
+│       └── agent-task-consumer.ts # Async task processing
 │
-├── contracts/         # Solidity smart contracts (Foundry)
-│   ├── src/AgenticCommerce.sol    # ERC-8183 job protocol
-│   ├── script/Deploy.s.sol       # Deployment script
-│   └── test/AgenticCommerce.t.sol # Comprehensive test suite
+├── showcase/                     # Interactive demo (Vite)
+│   ├── index.html               # Multi-tab showcase
+│   └── main.js                  # UI logic + AskRiver demo
 │
-├── newsriver-skill/   # SKILL.md for AI agent integration
+├── docs/                        # Screenshots + media
+├── CONVERSATION_LOG.md          # Agent-human collaboration log
 └── README.md
 ```
 
