@@ -82,6 +82,43 @@ The Synthesis judges specifically ask for documentation of the building process.
 - **Result**: 4 verified on-chain USDC transactions on Base mainnet, visible on [Basescan](https://basescan.org/address/0xe713fDE259695e105286276135042482811604F9#tokentxns)
 - **Wallets involved**: Agent #1, Agent #2, Treasury — real agent-to-agent commerce
 
+### Phase 13: Self-Custody & Submission Publishing (Mar 13, 2026)
+- **Human**: Registered for The Synthesis hackathon, agent identity created (Agent ID: 30053)
+- **Agent**: Discovered that publishing requires self-custody transfer of the ERC-8004 agent identity. Automated the full flow:
+  1. Called `/agents/{id}/transfer-to-self-custody` API 
+  2. Signed the self-custody ownership message with Privy wallet
+  3. Submitted signed proof back to finalize transfer
+  4. Published the project submission with all metadata
+- **Key Pivot**: Devfolio API returned `custodyType: custodial` — agent couldn't publish until taking self-custody of its own identity. Agent figured out the undocumented transfer flow.
+- **Result**: Project published as submission #7, `custodyType: self-custody`, all tracks and metadata live
+
+### Phase 14: Competitive Analysis & Track Optimization (Mar 17, 2026)
+- **Human**: "Can you check the competition and make us win?"
+- **Agent**: Performed full competitive analysis:
+  1. Scraped all 11 competing projects via Devfolio API
+  2. Analyzed all 39 prize tracks and prize pools ($44K total)
+  3. **Discovered critical issue** — one of our tracks ("Agents that pay") requires live GMX perps trading. We don't have that → guaranteed disqualification.
+  4. Replaced with 3 qualifying tracks: ERC-8183 Open Build ($2K), ERC-8004 ($16K), Let the Agent Cook ($6K)
+  5. Rewrote description with on-chain proof (contract addresses, BaseScan links)
+  6. Added `deployedURL` → `showcase.yieldcircle.app`
+  7. Updated submission metadata with tools, skills, and helpful resources
+- **Result**: 4 correct tracks worth $38K+ in prizes, zero DQ risk
+
+### Phase 15: Moltbook Registration + Post (Mar 17, 2026)
+- **Human**: Claimed the Moltbook agent identity (platform requires human verification)
+- **Agent**: Registered as `newsriver-agent`, posted project announcement, solved verification challenge (math puzzle), added `moltbookPostURL` to submission
+- **Result**: Verified post at [moltbook.com/posts/d20e798c...](https://www.moltbook.com/posts/d20e798c-805a-4fb7-99d2-e1b3adb5e7b4)
+
+### Phase 16: Source Code Push & Security Audit (Mar 17, 2026)
+- **Human**: "Make sure there are no leaked secrets in public repos"
+- **Agent**: 
+  1. Copied 13 source files (contracts + worker code) to public showcase repo
+  2. Ran 5-pass secret scan: API key patterns, hardcoded private keys, Bearer tokens, passwords, platform-specific keys
+  3. All clean — secrets use `c.env.*` bindings, no hardcoded values
+  4. Added screenshots + architecture diagram to README
+  5. Set 10 GitHub topics for discoverability
+- **Result**: Commit `f3a7194` pushed with +3,972 lines. Repo now has visible source code, screenshots, and architecture diagram
+
 ---
 
 ## Notable Human-Agent Collaboration Moments
@@ -102,6 +139,12 @@ The Synthesis judges specifically ask for documentation of the building process.
 **Context**: The Jobs tab showed raw hex data instead of human-readable job descriptions.
 **Agent's contribution**: Built a manual ABI decoder in JavaScript (no ethers.js dependency) to decode ERC-8183 job tuples directly from on-chain data.
 **Human's role**: Verified the decoded output matched BaseScan data.
+
+### The Track Disqualification Discovery
+**Context**: Project was submitted to 2 tracks — but the agent discovered one track ("Agents that pay") requires live GMX perps trading on Arbitrum, which we don't have.
+**Agent's contribution**: Scraped all 39 tracks from the hackathon API, cross-referenced requirements against our actual capabilities, identified the DQ risk, and proposed 3 replacement tracks aligned with our on-chain proof.
+**Human's role**: "Can you check the competition and make us win?" — gave the agent permission to do deep competitive analysis.
+**Resolution**: Swapped from 2 tracks (1 wrong) to 4 correct tracks worth $38K in prizes. The agent caught what would have been an automatic disqualification.
 
 ---
 
